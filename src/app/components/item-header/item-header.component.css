@@ -1,0 +1,11 @@
+.example-chip-list {
+    width: 50%;
+}
+
+.mat-option {
+    word-break: break-all;
+    white-space: normal;
+    height: unset;
+    line-height: normal;
+    margin-bottom: 5px;
+   }

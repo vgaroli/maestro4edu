@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    height: 60px;
+    align-content: center;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  }
+
+  .header button{
+    background-color: transparent;
+    color: aliceblue;
+    border: none;
+  }
+
+  .header button:active{
+    background-color: aqua;
+  }
+  
+  .header a{
+    color: aliceblue;
+  }
+  
+
+.header div:nth-child(2){
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header div:nth-child(3){
+    flex-grow: 1;
+    margin-left: 10px;
+    text-align: right;
+}
+  .user-avatar {
+    max-height: 37px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  
