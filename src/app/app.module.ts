@@ -23,6 +23,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
 
+//echart
+import { NgxEchartsModule } from 'ngx-echarts';
 
 //CKEditor
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -31,6 +33,7 @@ import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 
 //Próprios
 import { BoletimComponent } from './components/boletim/boletim.component';
+import { TempoGeekieChartComponent } from './components/tempo-geekie-chart/tempo-geekie-chart.component';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -90,6 +93,24 @@ const dbConfig: DBConfig  = {
         { name: 'descricao', keypath: 'descricao', options: { unique: false } },
       ],
     },
+    {
+      store: 'eixosEstruturantes',
+      storeConfig: { keyPath: 'id', autoIncrement: false },
+      storeSchema: [
+        { name: 'id', keypath: 'id', options: { unique: true } },
+        { name: 'tags', keypath: 'tags', options: { unique: false } },
+        { name: 'descricao', keypath: 'descricao', options: { unique: false } },
+      ],
+    },
+    {
+      store: 'disciplinas',
+      storeConfig: { keyPath: 'id', autoIncrement: false },
+      storeSchema: [
+        { name: 'id', keypath: 'id', options: { unique: true } },
+        { name: 'tags', keypath: 'tags', options: { unique: false } },
+        { name: 'descricao', keypath: 'descricao', options: { unique: false } },
+      ],
+    },
   ]
 };
 
@@ -97,6 +118,7 @@ const dbConfig: DBConfig  = {
   declarations: [
     AppComponent,
     BoletimComponent,
+    TempoGeekieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,10 +133,14 @@ const dbConfig: DBConfig  = {
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatAutocompleteModule,
     NgxIndexedDBModule.forRoot(dbConfig),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

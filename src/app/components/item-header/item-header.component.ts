@@ -30,7 +30,7 @@ export class ItemHeaderComponent implements AfterViewInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Input() etiqueta: string = "Teste etiqueta"
   @Input() classificacao: string =""
-  @Input() classificacoes: string[] 
+  @Input() classificacoes: string[] = []
   @Output()  classificacoesChange = new  EventEmitter<string[]>()
 
   constructor(private lAnalytics: LearningAnalyticsService) {}
@@ -43,7 +43,7 @@ export class ItemHeaderComponent implements AfterViewInit {
     const input = event.input;
     const value = event.value.substr(0, event.value.indexOf('|'));
 
-    // Add our fruit
+ 
     if ((value || '').trim()) {
       this.classificacoes.push(value.trim());
       this.classificacoesChange.emit(this.classificacoes)
@@ -52,6 +52,7 @@ export class ItemHeaderComponent implements AfterViewInit {
     // Reset the input value
     if (input) {
       input.value = '';
+      this.runFilter('')
     }
   }
 
@@ -69,16 +70,20 @@ export class ItemHeaderComponent implements AfterViewInit {
     })
   }
 
+  runFilter(value: string){
+    this.filterdClassificacao = 
+    this.todasClassificacoes.filter(item => 
+      ((item.tags.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) !== -1 ||
+      item.descricao.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) !== -1)&&
+        this.classificacoes.indexOf(item.tags)===-1)
+      )
+  }
+
   ngAfterViewInit(): void {
     this.loadData()
     this.myControl.valueChanges.pipe(
       map(value => {
-          this.filterdClassificacao = 
-          this.todasClassificacoes.filter(item => 
-            ((item.tags.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) !== -1 ||
-            item.descricao.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) !== -1)&&
-              this.classificacoes.indexOf(item.tags)===-1)
-            )
+          this.runFilter(value)
         }
       )
     ).subscribe()

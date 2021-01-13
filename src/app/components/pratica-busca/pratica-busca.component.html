@@ -1,0 +1,40 @@
+<div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="listaPraticas$ | async">
+      <!-- Coluna descrição -->
+      <ng-container matColumnDef="descricao" sticky>
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td mat-cell *matCellDef="let pratica"> {{pratica.descricao}} </td>
+      </ng-container>
+      <!-- Coluna tipo ferramenta -->
+      <ng-container matColumnDef="tipoFerramenta" sticky>
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let pratica"> {{pratica.tipoFerramenta}} </td>
+      </ng-container>
+      <!-- Coluna competências -->
+      <ng-container matColumnDef="competencias">
+        <th mat-header-cell *matHeaderCellDef> Competências </th>
+        <td mat-cell *matCellDef="let pratica"> {{pratica.competenciasBNCC}} </td>
+      </ng-container>
+      <!-- Star Column -->
+      <ng-container matColumnDef="star" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let pratica">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editar(pratica.id)">
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="copiar(pratica.id)">
+              <mat-icon>content_copy</mat-icon>
+              <span>Copiar</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>

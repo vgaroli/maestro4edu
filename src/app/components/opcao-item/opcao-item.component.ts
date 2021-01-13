@@ -15,7 +15,7 @@ export class OpcaoItemComponent implements OnInit {
   }
   
   public editor = Editor
-  @Input() data: string ="<p>Pergunta</p>"
+  @Input() data: string ="olá"
   @Output() dataChange = new EventEmitter<string>()
   dadoEdicao: string = ''
 

@@ -1,0 +1,40 @@
+<div class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="listaItens$ | async">
+    <!-- Coluna descrição -->
+    <ng-container matColumnDef="conteudo" sticky>
+      <th mat-header-cell *matHeaderCellDef> Conteúdo </th>
+      <td mat-cell *matCellDef="let item"> {{item.conteudo}} </td>
+    </ng-container>
+    <!-- Coluna competências -->
+    <ng-container matColumnDef="competencias" sticky>
+      <th mat-header-cell *matHeaderCellDef> Competências </th>
+      <td mat-cell *matCellDef="let item"> {{item.competenciasBNCC}} </td>
+    </ng-container>
+    <!-- Coluna habilidade -->
+    <ng-container matColumnDef="habilidades" sticky>
+      <th mat-header-cell *matHeaderCellDef> Habilidades </th>
+      <td mat-cell *matCellDef="let item"> {{item.habilidadesBNCC}} </td>
+    </ng-container>
+    <!-- Star Column -->
+    <ng-container matColumnDef="star" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editar(item.id)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="copiar(item.id)">
+            <mat-icon>content_copy</mat-icon>
+            <span>Copiar</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

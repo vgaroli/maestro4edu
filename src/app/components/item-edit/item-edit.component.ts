@@ -8,7 +8,7 @@ import * as Editor from '../../../assets/ckeditor5/ckeditor'
 })
 export class ItemEditComponent implements OnInit {
   public config = {
-    width: 1000,
+    width: 800,
     height: 400,
     toolbar: [ 'heading',
     '|', 'underline', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'alignment',
@@ -24,14 +24,18 @@ export class ItemEditComponent implements OnInit {
   }
   
   public editor = Editor
-  @Input() data: string ="<p>Pergunta</p>"
+  @Input() data: string="Olá"
   @Output() dataChange = new EventEmitter<string>()
-  dadoEdicao: string = ''
+  //dadoEdicao: string = ''
   constructor() { }
   
   ngOnInit(): void {
     //this.editor.builtinPlugins.map( plugin => console.log(plugin.pluginName) );
-    this.dadoEdicao = this.data
+    //this.dadoEdicao = this.data
+  }
+
+  setEditor(texto: string){
+    this.editor.setData(texto)
   }
 
   changeData(event: any){

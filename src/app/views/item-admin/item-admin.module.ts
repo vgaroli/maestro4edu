@@ -17,13 +17,21 @@ import { ItemEditComponent } from '../../components/item-edit/item-edit.componen
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 //CKEditor
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { OpcaoItemComponent } from 'src/app/components/opcao-item/opcao-item.component';
 
+import { DialogContentExampleDialog } from './item-admin.component';
+import { ItemBuscaComponent } from 'src/app/components/item-busca/item-busca.component';
+
+
 @NgModule({
-  declarations: [ItemAdminComponent, ItemHeaderComponent, ItemEditComponent, OpcaoItemComponent  ],
+  declarations: [ItemAdminComponent, ItemBuscaComponent, ItemHeaderComponent, ItemEditComponent, OpcaoItemComponent, DialogContentExampleDialog  ],
   imports: [
     CommonModule,
     ItemAdminRoutingModule,
@@ -39,5 +47,8 @@ import { OpcaoItemComponent } from 'src/app/components/opcao-item/opcao-item.com
     ReactiveFormsModule,
     MatIconModule,
     MatRadioModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
   ]})
 export class ItemAdminModule { }

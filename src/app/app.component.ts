@@ -42,7 +42,6 @@ export class AppComponent {
         if (result.credential){
           let credencial: any = result.credential
           //this.principal.accessToken = credencial.accessToken
-          console.log(credencial)
         }
       }
     );

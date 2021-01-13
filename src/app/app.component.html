@@ -8,15 +8,19 @@
       </a>
       <a mat-list-item routerLink="/item-admin">
           <mat-icon>ballot</mat-icon>
-          <span>Itens e Atividades</span>
+          <span>Banco de itens</span>
       </a>
       <a mat-list-item routerLink="/item-test">
           <mat-icon>assignment</mat-icon>
-          <span>Avaliações</span>
+          <span>Aplicar atividades</span>
       </a>
       <a mat-list-item routerLink="/boletim">
         <mat-icon>query_stats</mat-icon>
         <span>Boletim</span>
+      </a>
+      <a mat-list-item routerLink="/pratica-admin">
+        <mat-icon>query_stats</mat-icon>
+        <span>Banco de práticas</span>
       </a>
     <ng-container *ngFor="let menu of menus">
         <a mat-list-item [routerLink]="menu.routerLink">

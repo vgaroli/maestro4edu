@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>Editar Item</h2>
+<mat-dialog-content>
+    <div class="divCenter1000">
+        <div style="display: none;">{{ itemEditando.id }}</div>
+        <div Ksstyle="width: 500px;">
+            <mat-form-field class="label-total">
+                <mat-label>Conteúdo</mat-label>
+                <input matInput [(ngModel)]="itemEditando.conteudo">
+            </mat-form-field>
+        </div>
+        <label id="example-radio-group-label">Idioma: </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="itemEditando.idioma">
+            <mat-radio-button class="example-radio-button" *ngFor="let idioma of idiomas" [value]="idioma">
+                {{idioma}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <app-item-header [(classificacoes)]="itemEditando.competenciasBNCC" etiqueta="Competências Gerais"
+            classificacao="competenciasBNCC"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.habilidadesBNCC" etiqueta="Habilidades BNCC"
+            classificacao="habilidadesBNCC"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.componentesCurriculares" etiqueta="Componentes curriculares"
+            classificacao="componentesCurriculares"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.taxonomiasDeBloom" etiqueta="Taxonomia de Bloom"
+            classificacao="taxinomiaBloom"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.multiplasInteligencias" etiqueta="Múltiplas Inteligências"
+            classificacao="multiplasInteligencias"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.eixosEstruturantes" etiqueta="Eixos estruturantes"
+            classificacao="eixosEstruturantes"></app-item-header>
+        <br>
+        <label id="example-radio-group-label">Dificuldade: </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="itemEditando.grauDificuldade">
+            <mat-radio-button class="example-radio-button" *ngFor="let grauDificuldade of grausDificuldades"
+                [value]="grauDificuldade">
+                {{grauDificuldade}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <label id="example-radio-group-label">Visibilidade: </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="itemEditando.visibilidade">
+            <mat-radio-button class="example-radio-button" *ngFor="let visibilidade of visibilidades"
+                [value]="visibilidade">
+                {{visibilidade}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <label id="example-radio-group-label">Tipo do item: </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="itemEditando.tipoDoItem">
+            <mat-radio-button class="example-radio-button" *ngFor="let tipoItem of tiposItem" [value]="tipoItem">
+                {{tipoItem}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <app-item-header [(classificacoes)]="itemEditando.tipologiasItemObjetivo"
+            *ngIf="itemEditando.tipoDoItem == 'Objetivo'" etiqueta="Tipologia de Item Objetivo"
+            classificacao="tipologiaItensObjetivo"></app-item-header>
+        <app-item-header [(classificacoes)]="itemEditando.tipologiasItemDiscursivo"
+            *ngIf="itemEditando.tipoDoItem == 'Discursivo'" etiqueta="Tipologia de Item Discursivo"
+            classificacao="tipologiaItensDiscursivo"></app-item-header>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Tempo padrão (seg.):</mat-label>
+                <select matNativeControl [(ngModel)]="itemEditando.tempo" name="tempo">
+                    <option *ngFor="let tempo of tempos" [value]="tempo">
+                        {{tempo}}
+                    </option>
+                </select>
+            </mat-form-field>
+        </p>
+        <app-item-edit [(data)]="itemEditando.textoItem"></app-item-edit>
+        <ng-container *ngIf="itemEditando.tipoDoItem == 'Objetivo'">
+            <button mat-raised-button color="primary" (click)="addOpcao()">Nova opção</button>
+            <div *ngFor="let opcao of itemEditando.opcoesItem">
+                <mat-checkbox class="example-margin" [(ngModel)]="opcao.correta">Correta</mat-checkbox>
+                <app-opcao-item [(data)]="opcao.texto"></app-opcao-item>
+            </div>
+        </ng-container>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" color="primary" (click)="salvar()" cdkFocusInitial>Salvar</button>
+    <ng-container *ngIf="itemEditando.id">
+        <button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+            <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Salvar</button>
+            <button mat-menu-item>Copiar</button>
+        </mat-menu>
+    </ng-container>
+</mat-dialog-actions>

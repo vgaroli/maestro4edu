@@ -1,3 +1,4 @@
+import { DadosDisciplinaBoletim } from './../../models/boletim.model';
 import { Component, AfterViewInit, Input  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Cabecalho, DadoBoletim } from 'src/app/models/boletim.model';
@@ -20,18 +21,16 @@ export class BoletimComponent implements AfterViewInit  {
 
   ngAfterViewInit(){
     if(this.idGoogle){
-      console.log(this.idGoogle)
-      this.getBoletim()
+      this.getBoletim(this.idGoogle)
     }
   }
 
-  getBoletim(){
+  getBoletim(idGoogle: string){
     this.firestore.doc<Cabecalho>("escolas/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/cabecalhosBoletins/EF2")
     .get().subscribe(cabecalho => {
       this.colunasGrid=cabecalho.data().colunas
       this.customStyle=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
       this.textos = cabecalho.data().cabecalho
-      console.log(this.textos)
     })
   }
 }
