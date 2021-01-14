@@ -34,7 +34,7 @@ export interface Pratica{
     referencias: string
 }
 
-export interface AtividadeHeader{
+export interface AvaliacaoHeader{
     id?: string
     idInstituicao?: string
     idAplicador: string
@@ -46,9 +46,10 @@ export interface AtividadeHeader{
     dataFim: firebase.firestore.Timestamp
     mediaAproveitamento: number
     encerrada: boolean
+    visibilidade: string
 }
 
-export interface AtividadeItens{
+export interface AvaliacaoItens{
     id?: string
     idAtividade: string
     pontuacao: number
@@ -56,7 +57,7 @@ export interface AtividadeItens{
     item: Item
 }
 
-export interface AtividadeParticipantes{
+export interface AvaliacaoParticipantes{
     id?: string
     idAtividade: string
     idParticipante: string

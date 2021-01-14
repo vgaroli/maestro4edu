@@ -12,4 +12,8 @@ export class AvaliacaoAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  criarAvaliacao(){
+    
+  }
+
 }

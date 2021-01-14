@@ -22,6 +22,10 @@
         <mat-icon>query_stats</mat-icon>
         <span>Banco de práticas</span>
       </a>
+      <a mat-list-item routerLink="/avaliacao-admin">
+        <mat-icon>query_stats</mat-icon>
+        <span>Avaliações/Tarefas</span>
+      </a>
     <ng-container *ngFor="let menu of menus">
         <a mat-list-item [routerLink]="menu.routerLink">
             <mat-icon>{{menu.icone}}</mat-icon>

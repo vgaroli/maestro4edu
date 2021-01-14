@@ -1,4 +1,4 @@
-import { ClassificacaoLearningAnalytics, Item, Pratica } from './../models/learningAnalytics.model';
+import { ClassificacaoLearningAnalytics, Item, Pratica, AvaliacaoHeader } from './../models/learningAnalytics.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -11,10 +11,12 @@ export class LearningAnalyticsService {
   private cgCollection: AngularFirestoreCollection<ClassificacaoLearningAnalytics>
   private itemCollection: AngularFirestoreCollection<Item>
   private planoCollection: AngularFirestoreCollection<Pratica>
+  private avaliacaoHeaderCollection: AngularFirestoreCollection<AvaliacaoHeader>
 
   constructor(private firestore: AngularFirestore, private dbService: NgxIndexedDBService) {
     this.itemCollection = firestore.collection<Item>('bancoItens')
     this.planoCollection = firestore.collection<Pratica>('bancoPraticas')
+    this.avaliacaoHeaderCollection = firestore.collection<AvaliacaoHeader>('avaliacoesHeader')
 
   }
 
@@ -34,10 +36,18 @@ export class LearningAnalyticsService {
     return this.itemCollection.doc(id).valueChanges()
   }
 
+  
+
   listaItens(): Observable<Item[]>{
     let listaItens$: Observable<Item[]>
     listaItens$ = this.itemCollection.valueChanges()
     return listaItens$
+  }
+
+  listaAvaliacoes(): Observable<AvaliacaoHeader[]>{
+    let listaAvaliacoes$: Observable<AvaliacaoHeader[]>
+    listaAvaliacoes$ = this.avaliacaoHeaderCollection.valueChanges()
+    return listaAvaliacoes$
   }
 
   listaPlanos(): Observable<Pratica[]>{

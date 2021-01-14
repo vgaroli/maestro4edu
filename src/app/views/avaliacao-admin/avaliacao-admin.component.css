@@ -1,0 +1,21 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+.label-total{
+  width:100%
+}
+
+body{
+  font-size: 10px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 500px auto;
+  border: solid 1px red;
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+  height: 100%;
+}

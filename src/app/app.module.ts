@@ -103,7 +103,7 @@ const dbConfig: DBConfig  = {
       ],
     },
     {
-      store: 'disciplinas',
+      store: 'componentesCurriculares',
       storeConfig: { keyPath: 'id', autoIncrement: false },
       storeSchema: [
         { name: 'id', keypath: 'id', options: { unique: true } },
