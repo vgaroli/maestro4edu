@@ -33,7 +33,15 @@ export class ItemHeaderComponent implements AfterViewInit {
   @Input() classificacoes: string[] = []
   @Output()  classificacoesChange = new  EventEmitter<string[]>()
 
-  constructor(private lAnalytics: LearningAnalyticsService) {}
+  constructor(private lAnalytics: LearningAnalyticsService) {
+    this.lAnalytics.savedData.subscribe(valor =>{
+      if (valor == this.classificacao){
+        this.loadData()
+      }
+    })
+  }
+
+
    selected(event: MatAutocompleteSelectedEvent): void {
     this.classificacoes.push(event.option.viewValue.substr(0, event.option.viewValue.indexOf('|')));
     this.classificacaoInput.nativeElement.value = '';

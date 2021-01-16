@@ -1,1 +1,32 @@
-<p>avaliacao-header works!</p>
+<mat-form-field class="label-total">
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="avaliacaoHeaderEditando.titulo" (change)="changeData()">
+</mat-form-field>
+<br>
+<div class="container-line">
+    <div>
+        <label id="example-radio-group-label">Modo entrega: </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="avaliacaoHeaderEditando.modoEntrega" (change)="changeData()">
+            <mat-radio-button class="example-radio-button" *ngFor="let modoEntrega of modosEntrega"
+                [value]="modoEntrega">
+                {{modoEntrega}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Data início</mat-label>
+            <input matInput [matDatepicker]="dtInicio" [(ngModel)]="dataInicio" (ngModelChange)="changeInicio()">
+            <mat-datepicker-toggle matSuffix [for]="dtInicio"></mat-datepicker-toggle>
+            <mat-datepicker #dtInicio></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Data final</mat-label>
+            <input matInput [matDatepicker]="dtFim" [(ngModel)]="dataFim" (ngModelChange)="changeFim()">
+            <mat-datepicker-toggle matSuffix [for]="dtFim"></mat-datepicker-toggle>
+            <mat-datepicker #dtFim></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>

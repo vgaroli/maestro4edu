@@ -11,12 +11,6 @@ export interface OpcaoItem{
     correta: boolean
 }
 
-export enum ModoEntregaAtividade{
-    avaliacao,
-    tarefa,
-    jogo
-}
-
 export interface Pratica{
     id?: string
     tipoFerramenta: string
@@ -38,15 +32,16 @@ export interface AvaliacaoHeader{
     id?: string
     idInstituicao?: string
     idAplicador: string
-    descricao: string
-    pontuacaoMaxima: number
-    notaMaxima: number
-    modoEntrega: ModoEntregaAtividade
-    dataInicio: firebase.firestore.Timestamp
-    dataFim: firebase.firestore.Timestamp
-    mediaAproveitamento: number
+    titulo: string
+    pontuacaoMaxima?: number
+    notaMaxima?: number
+    modoEntrega?: string
+    dataInicio?: firebase.firestore.Timestamp
+    dataFim?: firebase.firestore.Timestamp
+    mediaAproveitamento?: number
     encerrada: boolean
     visibilidade: string
+    liberada: boolean
 }
 
 export interface AvaliacaoItens{
@@ -61,6 +56,8 @@ export interface AvaliacaoParticipantes{
     id?: string
     idAtividade: string
     idParticipante: string
+    nomeParticipante: string
+    emailParticipante: string
     dataInicio: firebase.firestore.Timestamp
     dataFim: firebase.firestore.Timestamp
     pontuacao: number

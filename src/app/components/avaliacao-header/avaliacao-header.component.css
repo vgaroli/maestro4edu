@@ -1,0 +1,24 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+
+.example-radio-button{
+  margin-bottom: 10px;
+}
+
+.container-line{
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+}
+
+.label-total{
+    width:100%
+}
+
+.container-line > div {
+  margin-right: 20px;
+}
+  

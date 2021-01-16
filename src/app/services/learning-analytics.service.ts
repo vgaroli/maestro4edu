@@ -1,6 +1,6 @@
 import { ClassificacaoLearningAnalytics, Item, Pratica, AvaliacaoHeader } from './../models/learningAnalytics.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
 
@@ -13,11 +13,29 @@ export class LearningAnalyticsService {
   private planoCollection: AngularFirestoreCollection<Pratica>
   private avaliacaoHeaderCollection: AngularFirestoreCollection<AvaliacaoHeader>
 
+  @Output()  savedData = new  EventEmitter<string>()
+
   constructor(private firestore: AngularFirestore, private dbService: NgxIndexedDBService) {
     this.itemCollection = firestore.collection<Item>('bancoItens')
     this.planoCollection = firestore.collection<Pratica>('bancoPraticas')
     this.avaliacaoHeaderCollection = firestore.collection<AvaliacaoHeader>('avaliacoesHeader')
 
+  }
+
+  newID(): string{
+    return this.firestore.createId()
+  }
+
+  saveDocumentLearning<T>(documento: T, colecao: string, id: string){
+    this.firestore.collection<T>(colecao).doc(id).set(documento)    
+  }
+
+  addAvaliacaoHeader(avaliacaoHeader: AvaliacaoHeader): string{
+    let idAvaliacaoHeader: string
+    idAvaliacaoHeader = this.firestore.createId()
+    avaliacaoHeader.id = idAvaliacaoHeader
+    this.avaliacaoHeaderCollection.doc(idAvaliacaoHeader).set(avaliacaoHeader)
+    return idAvaliacaoHeader
   }
 
   addItem(item: Item): string {
@@ -77,18 +95,9 @@ export class LearningAnalyticsService {
   }
 
   saveDadosIndexedDB(store: string, dados: Observable<ClassificacaoLearningAnalytics[]>) {
-    // const storeSchema: ObjectStoreMeta = {
-    //   store: store,
-    //   storeConfig: { keyPath: 'id', autoIncrement: false },
-    //   storeSchema: [
-    //     { name: 'id', keypath: 'id', options: { unique: true } },
-    //     { name: 'tags', keypath: 'tags', options: { unique: false } },
-    //     { name: 'descricao', keypath: 'descricao', options: { unique: false } },
-    //   ],
-    // }
-    //this.dbService.createObjectStore(storeSchema)
     dados.subscribe(itens => {
       itens.map(item => this.dbService.add(store, item))
+      this.savedData.emit(store)
     })
   }
 

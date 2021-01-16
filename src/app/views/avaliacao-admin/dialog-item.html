@@ -2,12 +2,10 @@
 <mat-dialog-content>
     <div class="divCenter1000">
         <div style="display: none;">{{ itemEditando.id }}</div>
-        <div style="width: 500px;">
-            <mat-form-field class="label-total">
-                <mat-label>Conteúdo</mat-label>
-                <input matInput [(ngModel)]="itemEditando.conteudo">
-            </mat-form-field>
-        </div>
+        <mat-form-field class="label-total">
+            <mat-label>Conteúdo</mat-label>
+            <input matInput [(ngModel)]="itemEditando.conteudo">
+        </mat-form-field>
         <label id="example-radio-group-label">Idioma: </label>
         <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
             [(ngModel)]="itemEditando.idioma">

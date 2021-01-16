@@ -35,6 +35,8 @@ import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { BoletimComponent } from './components/boletim/boletim.component';
 import { TempoGeekieChartComponent } from './components/tempo-geekie-chart/tempo-geekie-chart.component';
 
+
+
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
   version: 1,

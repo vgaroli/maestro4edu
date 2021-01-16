@@ -12,9 +12,13 @@ export class PrincipalService {
   accessToken: string=""
   autenticado: boolean = false
   photoURL: string = ""
+  idUser: string =""
   
 
-  constructor(private auth: AngularFireAuth){}
+  constructor(private auth: AngularFireAuth){
+    this.auth.user.subscribe(u => this.idUser = u.uid)
+  }
+  
   contagem$ = this.contagem.asObservable()
 
 
