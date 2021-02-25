@@ -37,7 +37,7 @@ import { TempoGeekieChartComponent } from './components/tempo-geekie-chart/tempo
 import { ClassroomListComponent } from './components/classroom-list/classroom-list.component';
 import { HomeComponent } from './views/home/home.component';
 
-
+import { HttpClientModule } from '@angular/common/http';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -139,7 +139,8 @@ const dbConfig: DBConfig  = {
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    
+    HttpClientModule,
+
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatAutocompleteModule,

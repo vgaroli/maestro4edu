@@ -1,3 +1,4 @@
+import { PrincipalService } from './../../services/principal.service';
 import { ClassroomService } from './../../services/classroom.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -6,12 +7,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './classroom-list.component.html',
   styleUrls: ['./classroom-list.component.css']
 })
-export class ClassroomListComponent implements OnInit {
+export class ClassroomListComponent {
 
-  constructor(private classroomService: ClassroomService) { }
-
-  ngOnInit(): void {
-    this.classroomService.listCourses()
-  }
+  constructor(private classroomService: ClassroomService, private principalService: PrincipalService) {
+    this.principalService.okTokens.subscribe(
+      value => {
+        if(value){
+          this.classroomService.listCourses()
+        }
+      }
+    )
+   }
 
 }
