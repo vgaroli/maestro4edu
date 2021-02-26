@@ -13,7 +13,7 @@ export class ClassroomListComponent {
     this.principalService.okTokens.subscribe(
       value => {
         if(value){
-          this.classroomService.listCourses()
+          this.classroomService.listAllCourses()
         }
       }
     )

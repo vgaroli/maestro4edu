@@ -51,3 +51,17 @@ export interface Filho{
 export interface Pai{
   nome: string
 }
+
+export interface Conta{
+  id?: string
+  idGoogle: string
+  idGeekie?: string
+  conta: string
+  escola: string
+  pessoa: string
+  cargos: string[]
+  suspenso: boolean
+  raTotvs: string
+  foto?: string
+}
+

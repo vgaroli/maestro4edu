@@ -1,3 +1,5 @@
+import { Conta } from './../models/basic.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -10,36 +12,48 @@ import firebase from 'firebase/app';
 export class PrincipalService {
 
   private contagem = new Subject<number>()
-  nContagem: number=0
-  accessToken: string=""
+  nContagem: number = 0
+  accessToken: string = ""
+  escola: string=""
+  cargos: string[]=[]
   autenticado: boolean = false
   photoURL: string = ""
-  idUser: string =""
-  
+  idUser: string = ""
+  idGoogle: string = ""
+  conta: string = ""
 
   @Output() okTokens = new EventEmitter<boolean>()
 
 
-  constructor(private auth: AngularFireAuth){
+  constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) {
   }
-  
+
   contagem$ = this.contagem.asObservable()
 
 
 
-  checkToken(){
+  checkToken() {
     this.auth.authState.subscribe(
-      state =>  {
-        if(state){
+      state => {
+        if (state) {
           this.autenticado = true
           this.photoURL = state.photoURL
           this.photoURL = state.photoURL
           this.autenticado = true
-          if(! this.accessToken){
-             this.login()
-          } else
-          {
-            this.okTokens.emit(true)
+          this.conta = state.email
+          if (!this.accessToken) {
+            this.login()
+          } else {
+            this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', this.conta))
+              .valueChanges().subscribe(contas => {
+                if (contas) {
+                  let conta = contas[0]
+                  this.idGoogle = conta.idGoogle
+                  this.escola = conta.escola
+                  this.cargos = conta.cargos
+                  this.okTokens.emit(true)
+                }
+              })
           }
         }
       }
@@ -64,6 +78,7 @@ export class PrincipalService {
         if (result.credential) {
           let credencial: any = result.credential
           this.accessToken = credencial.accessToken
+
           this.checkToken()
         }
       }
