@@ -10,8 +10,9 @@ export class ClassroomService {
 
   constructor(private http: HttpClient, public principal: PrincipalService) { }
   listaCursos: Course[] = []
+  listaMyCursos: Course[] = []
 
-  listCourses(){
+  listAllCourses(){
     let header = new HttpHeaders()
     header.set("Authorization",`Bearer ${this.principal.accessToken}`)
     //header.append("Authorization",`Bearer ${this.principal.accessToken}`)
@@ -19,14 +20,23 @@ export class ClassroomService {
     let options= {
       headers: header
     }
-    
-    this.http.get("https://classroom.googleapis.com/v1/courses?courseStates=ACTIVE&key=AIzaSyDO5OLn1_j0xFFF_E3ES96AHipHtFtrJUY",
+    let url = ""
+    let isProfessor: boolean = this.principal.cargos.indexOf('professor') != -1 
+    if (isProfessor){
+      url = `https://classroom.googleapis.com/v1/courses?courseStates=ACTIVE&teacherId=${this.principal.idGoogle}&key=AIzaSyDO5OLn1_j0xFFF_E3ES96AHipHtFtrJUY`
+    } else {
+      url = `https://classroom.googleapis.com/v1/courses?courseStates=ACTIVE&studentId=${this.principal.idGoogle}&key=AIzaSyDO5OLn1_j0xFFF_E3ES96AHipHtFtrJUY`
+    }
+    this.http.get(url,
     { headers: new HttpHeaders().set("Authorization",`Bearer ${this.principal.accessToken}`) }).subscribe(resultado => 
       {
-        console.log(resultado)
-        
+        this.listaCursos = resultado["courses"]
+        if (isProfessor){
+          this.listaMyCursos = this.listaCursos.filter(curso => curso.ownerId == this.principal.idGoogle)
+        } else {
+          this.listaMyCursos = this.listaCursos
+        }
       }
     )
   }
-
 }
