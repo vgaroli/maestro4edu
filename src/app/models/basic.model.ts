@@ -1,4 +1,5 @@
 import { DocumentReference } from '@angular/fire/firestore';
+import firebase from 'firebase';
 
 export interface DateData{
   year: number,
@@ -63,5 +64,6 @@ export interface Conta{
   suspenso: boolean
   raTotvs: string
   foto?: string
+  ultimoUpdateClassroom?: firebase.firestore.Timestamp
 }
 

@@ -17,6 +17,17 @@ export class ClassroomListComponent {
         }
       }
     )
+    this.classroomService.cursosOk.subscribe(value => {
+      if(value){
+        this.processarTarefas()
+      }
+    })
    }
+
+processarTarefas(){
+  this.classroomService.listaMyCursos.forEach((curso,i) => {
+    
+  })
+}
 
 }

@@ -1,16 +1,25 @@
 import { Course } from './../models/classroom.model';
 import { PrincipalService } from './principal.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassroomService {
 
+  @Output() cursosOk = new EventEmitter<boolean>()
+
   constructor(private http: HttpClient, public principal: PrincipalService) { }
   listaCursos: Course[] = []
   listaMyCursos: Course[] = []
+
+  
+  listWorks(idCourse: string){
+    
+  }
+
+  
 
   listAllCourses(){
     let header = new HttpHeaders()
@@ -36,6 +45,7 @@ export class ClassroomService {
         } else {
           this.listaMyCursos = this.listaCursos
         }
+        this.cursosOk.emit(true)
       }
     )
   }
