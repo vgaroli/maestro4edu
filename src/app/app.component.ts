@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'maestro4edu';
   photoURL: string = null
   autenticado: boolean = false
+  escola: string = ""
 
   constructor(private principalService: PrincipalService) {
     this.principalService.checkToken()
@@ -19,6 +20,7 @@ export class AppComponent {
         if (value) {
           this.autenticado = this.principalService.autenticado
           this.photoURL = this.principalService.photoURL
+          this.escola = this.principalService.nomeEscola
         }
       }
     )

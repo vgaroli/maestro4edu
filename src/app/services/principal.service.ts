@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Escola } from './../models/escola.model';
 import { Conta } from './../models/basic.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -5,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import firebase from 'firebase/app';
+import { first } from 'rxjs/operators';
 
 
 @Injectable({
@@ -16,6 +18,7 @@ export class PrincipalService {
   nContagem: number = 0
   accessToken: string = ""
   escola: string=""
+  nomeEscola: string=""
   cargos: string[]=[]
   autenticado: boolean = false
   photoURL: string = ""
@@ -35,8 +38,12 @@ export class PrincipalService {
 
 
   updateConta(conta: Conta){
-
-  }
+    let colect =    this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', conta.conta))
+    .snapshotChanges().pipe(first()).subscribe(snaps => {
+      this.firestore.collection<Conta>('contas').doc(snaps[0].payload.doc.id).update(conta)
+    }
+  )
+}
 
   checkToken() {
     this.auth.authState.subscribe(
@@ -51,9 +58,10 @@ export class PrincipalService {
           if (!this.accessToken) {
             this.login()
           } else {
-            let docConta = this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', this.conta)).doc('0CUrtK5pUzuExjRD7v6x')
+            let docConta = this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', this.conta))
             docConta
-              .valueChanges().subscribe(conta => {
+              .valueChanges().pipe(first()).subscribe(contas => {
+                let conta = contas[0]
                 if (conta) {
                   this.idGoogle = conta.idGoogle
                   this.escola = conta.escola
@@ -63,11 +71,12 @@ export class PrincipalService {
                   } else {
                     this.ultimoUpdateClassroom = new Date
                     conta.ultimoUpdateClassroom = firebase.firestore.Timestamp.fromDate(this.ultimoUpdateClassroom)
-                    docConta.update(conta)
+                    this.updateConta(conta)
                   }
                   this.firestore.collection<Escola>('escolas').doc(this.escola).valueChanges()
                     .subscribe(escola => {
                       this.anoLetivo = escola.anoLetivo
+                      this.nomeEscola = escola.fantasia
                       this.okTokens.emit(true)
                     })
                 }
