@@ -1,3 +1,4 @@
+import { AnoLetivo } from './models/escola.model';
 import { PrincipalService } from './services/principal.service';
 import { Component } from '@angular/core';
 
@@ -12,6 +13,8 @@ export class AppComponent {
   photoURL: string = null
   autenticado: boolean = false
   escola: string = ""
+  anos: AnoLetivo[]
+  anoLetivo: number
 
   constructor(private principalService: PrincipalService) {
     this.principalService.checkToken()
@@ -21,6 +24,8 @@ export class AppComponent {
           this.autenticado = this.principalService.autenticado
           this.photoURL = this.principalService.photoURL
           this.escola = this.principalService.nomeEscola
+          this.anos = this.principalService.anosLetivos
+          this.anoLetivo = this.principalService.anoLetivo
         }
       }
     )

@@ -1,3 +1,9 @@
-<div *ngFor="let curso of courses">
-    {{ curso.name }}
-</div>
+<ng-container *ngFor="let curso of courses">
+    <div class="grid-container">
+        <div class="header">{{ curso.name }}</div>
+        <ng-container *ngFor="let numero of curso.values">
+            <div class="item">{{ numero.description }}</div>
+            <div class="item number" [style]="numero.cor">{{ numero.total }}</div>
+        </ng-container>
+    </div>
+</ng-container>

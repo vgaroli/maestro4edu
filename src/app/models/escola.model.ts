@@ -6,3 +6,8 @@ export interface Escola {
   cnpj: string
   anoLetivo: number
 }
+
+export interface AnoLetivo{
+  id?: string
+  ano: number
+}

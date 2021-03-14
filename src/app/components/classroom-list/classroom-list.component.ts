@@ -11,37 +11,34 @@ import { Component, OnInit } from '@angular/core';
 export class ClassroomListComponent {
 
   listCourses: Course[]
-  courses: CourseReport[]
+  courses: CourseReport[] = []
 
   constructor(private classroomService: ClassroomService, private principalService: PrincipalService) {
     this.principalService.okTokens.subscribe(
       value => {
-        if(value){
+        if (value) {
           this.classroomService.listAllCourses()
         }
       }
     )
     this.classroomService.cursosOk.subscribe(value => {
-      if(value){
-        this.classroomService.listaMyCursos.forEach(course =>
-          {
+      if (value) {
+        this.classroomService.listaMyCursos.forEach(course => {
           let courseReport = {
             id: course.id,
             name: course.name,
             section: course.section,
             values: []
           }
-         this.courses.push(courseReport) 
+          this.courses.push(courseReport)
+          this.processarTarefas(courseReport)
         })
-        this.processarTarefas()
       }
     })
-   }
+  }
 
-processarTarefas(){
-  this.classroomService.listaMyCursos.forEach((curso,i) => {
-    
-  })
-}
+  processarTarefas(course: CourseReport) {
+    this.classroomService.listCountWorks(course.id, course)
+  }
 
 }

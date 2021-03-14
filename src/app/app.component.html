@@ -42,7 +42,10 @@
       <button class="material-icons" style="vertical-align: middle; cursor: pointer;" (click)="start.toggle()">
         menu
       </button>
-      {{ escola }}
+      {{ escola }} - <select name="anoLetivo" id="anoLetivo">
+        <option *ngFor="let ano of anos" [value]="ano.ano"
+        [selected]="anoLetivo === ano.ano">{{ ano.ano }}</option>
+      </select>
       <img src="../assets/MaestroWhite.png" height="32px" alt="">
     </div>
     <div>

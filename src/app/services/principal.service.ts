@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { Escola } from './../models/escola.model';
+import { Escola, AnoLetivo } from './../models/escola.model';
 import { Conta } from './../models/basic.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -26,6 +26,7 @@ export class PrincipalService {
   idGoogle: string = ""
   conta: string = ""
   anoLetivo: number
+  anosLetivos: AnoLetivo[]
   ultimoUpdateClassroom: Date
 
   @Output() okTokens = new EventEmitter<boolean>()
@@ -68,8 +69,8 @@ export class PrincipalService {
                   this.cargos = conta.cargos
                   if (conta.ultimoUpdateClassroom){
                     this.ultimoUpdateClassroom = conta.ultimoUpdateClassroom.toDate()
+                    this.ultimoUpdateClassroom = new Date(1900,1,1)
                   } else {
-                    this.ultimoUpdateClassroom = new Date
                     conta.ultimoUpdateClassroom = firebase.firestore.Timestamp.fromDate(this.ultimoUpdateClassroom)
                     this.updateConta(conta)
                   }
@@ -77,7 +78,11 @@ export class PrincipalService {
                     .subscribe(escola => {
                       this.anoLetivo = escola.anoLetivo
                       this.nomeEscola = escola.fantasia
-                      this.okTokens.emit(true)
+                      this.firestore.collection<AnoLetivo>(`escolas/${this.escola}/anosLetivos`)
+                        .valueChanges().subscribe(anos => {
+                            this.anosLetivos = anos
+                            this.okTokens.emit(true)
+                          })
                     })
                 }
               })
@@ -98,7 +103,7 @@ export class PrincipalService {
     let provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("email")
     provider.addScope("https://www.googleapis.com/auth/classroom.courses")
-    provider.addScope("https://www.googleapis.com/auth/classroom.courses.readonly")
+    provider.addScope("https://www.googleapis.com/auth/classroom.coursework.students")
 
     this.auth.signInWithPopup(provider).then(
       result => {

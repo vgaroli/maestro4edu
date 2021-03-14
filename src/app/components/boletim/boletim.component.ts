@@ -1,3 +1,4 @@
+import { PrincipalService } from './../../services/principal.service';
 import { DadosDisciplinaBoletim } from './../../models/boletim.model';
 import { Component, AfterViewInit, Input  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -17,7 +18,7 @@ export class BoletimComponent implements AfterViewInit  {
   @Input() idGoogle: string = "100549381171868802195"
   @Input() idGrade: string
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private principal: PrincipalService) { }
 
   ngAfterViewInit(){
     if(this.idGoogle){
@@ -26,7 +27,7 @@ export class BoletimComponent implements AfterViewInit  {
   }
 
   getBoletim(idGoogle: string){
-    this.firestore.doc<Cabecalho>("escolas/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/cabecalhosBoletins/EF2")
+    this.firestore.doc<Cabecalho>(`escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/cabecalhosBoletins/EF2`)
     .get().subscribe(cabecalho => {
       this.colunasGrid=cabecalho.data().colunas
       this.customStyle=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
