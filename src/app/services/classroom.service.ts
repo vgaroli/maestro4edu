@@ -96,8 +96,8 @@ export class ClassroomService {
       let yearCreate = new Date(curso.creationTime).getFullYear()
       if (dtUpdate > this.principal.ultimoUpdateClassroom){
         console.log(`escolas\\${this.principal.escola}\\anosLetivos\\${yearCreate}\\salasClassroom`)
-        this.firestore.collection<Course>(`escolas\\${this.principal.escola}\\anosLetivos\\${yearCreate}\\salasClassroom\\${curso.id}`)
-          .add(curso).catch(erro => {
+        this.firestore.collection<Course>(`escolas/${this.principal.escola}/anosLetivos/${yearCreate}/salasClassroom`).doc(curso.id)
+          .set(curso).catch(erro => {
             console.log(erro)
           })
       }
