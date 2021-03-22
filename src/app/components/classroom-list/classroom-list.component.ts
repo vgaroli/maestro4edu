@@ -14,13 +14,17 @@ export class ClassroomListComponent {
   courses: CourseReport[] = []
 
   constructor(private classroomService: ClassroomService, private principalService: PrincipalService) {
-    this.principalService.okTokens.subscribe(
-      value => {
-        if (value) {
-          this.classroomService.listAllCourses()
+    if (this.principalService.tokensLoaded) {
+      this.classroomService.listAllCourses()
+    } else {
+      this.principalService.okTokens.subscribe(
+        value => {
+          if (value) {
+            this.classroomService.listAllCourses()
+          }
         }
-      }
-    )
+      )
+    }
     this.classroomService.cursosOk.subscribe(value => {
       if (value) {
         this.classroomService.listaMyCursos.forEach(course => {

@@ -15,6 +15,7 @@ import { first } from 'rxjs/operators';
 export class PrincipalService {
 
   private contagem = new Subject<number>()
+  tokensLoaded=false
   nContagem: number = 0
   accessToken: string = ""
   escola: string=""
@@ -81,6 +82,7 @@ export class PrincipalService {
                       this.firestore.collection<AnoLetivo>(`escolas/${this.escola}/anosLetivos`)
                         .valueChanges().subscribe(anos => {
                             this.anosLetivos = anos
+                            this.tokensLoaded = true
                             this.okTokens.emit(true)
                           })
                     })

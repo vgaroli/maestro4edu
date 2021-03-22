@@ -38,6 +38,7 @@ import { ClassroomListComponent } from './components/classroom-list/classroom-li
 import { HomeComponent } from './views/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DashTarefasComponent } from './views/dash-tarefas/dash-tarefas.component';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -125,6 +126,7 @@ const dbConfig: DBConfig  = {
     TempoGeekieChartComponent,
     ClassroomListComponent,
     HomeComponent,
+    DashTarefasComponent,
   ],
   imports: [
     BrowserModule,

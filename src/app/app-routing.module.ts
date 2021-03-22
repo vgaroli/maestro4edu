@@ -1,3 +1,4 @@
+import { DashTarefasComponent } from './views/dash-tarefas/dash-tarefas.component';
 import { HomeComponent } from './views/home/home.component';
 import { BoletimComponent } from './components/boletim/boletim.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'dash-tarefas',
+    component: DashTarefasComponent
   },
   { path: 'item-admin', loadChildren: () => import('./views/item-admin/item-admin.module').then(m => m.ItemAdminModule) },
   { path: 'item-test', loadChildren: () => import('./views/item-test/item-test.module').then(m => m.ItemTestModule) },
