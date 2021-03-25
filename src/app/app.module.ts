@@ -22,6 +22,9 @@ import { MatSidenavModule }  from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 //echart
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -39,6 +42,7 @@ import { HomeComponent } from './views/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DashTarefasComponent } from './views/dash-tarefas/dash-tarefas.component';
+import { GeekieClassPerfComponent } from './components/geekie-class-perf/geekie-class-perf.component';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -127,6 +131,7 @@ const dbConfig: DBConfig  = {
     ClassroomListComponent,
     HomeComponent,
     DashTarefasComponent,
+    GeekieClassPerfComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,7 +146,10 @@ const dbConfig: DBConfig  = {
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTableModule,
+    MatSortModule,
     HttpClientModule,
+    MatInputModule,
 
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebase),
