@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { Escola, AnoLetivo } from './../models/escola.model';
+import { Escola, AnoLetivo, Docente, Sala } from './../models/escola.model';
 import { Conta } from './../models/basic.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -29,6 +29,7 @@ export class PrincipalService {
   anoLetivo: number
   anosLetivos: AnoLetivo[]
   ultimoUpdateClassroom: Date
+  salas: Sala[]
 
   @Output() okTokens = new EventEmitter<boolean>()
 
@@ -83,7 +84,15 @@ export class PrincipalService {
                         .valueChanges().subscribe(anos => {
                             this.anosLetivos = anos
                             this.tokensLoaded = true
-                            this.okTokens.emit(true)
+                            if(this.cargos.indexOf('aluno')==-1){
+                              this.firestore.collection<Docente>(`escolas/${this.escola}/anosLetivos/${this.anoLetivo}/docentes`)
+                              .doc(this.idGoogle).valueChanges().subscribe(docente => {
+                                this.salas = docente.salas
+                                this.okTokens.emit(true)
+                              })
+                            } else {
+                              this.okTokens.emit(true)
+                            }
                           })
                     })
                 }

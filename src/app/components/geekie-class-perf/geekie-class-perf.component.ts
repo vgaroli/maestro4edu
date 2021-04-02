@@ -28,8 +28,8 @@ export class GeekieClassPerfComponent implements OnInit {
   @ViewChildren('innerTables') innerTables: QueryList<MatTable<ChapterPerformace>>;
 
   dataSource: MatTableDataSource<ChapterPerformaceSummary>;
-  columnsToDisplay = ['nome', 'recebidas', 'entregas'];
-  innerDisplayedColumns = ['disciplina', 'capítulo', 'recebidas','entregas'];
+  columnsToDisplay = ['nomeAluno', 'recebidas', 'quantidadeEntregas', 'engajamento', 'grade'];
+  innerDisplayedColumns = ['disciplina', 'nomeCapitulo', 'recebidas','quantidadeEntregas'];
   expandedElement: ChapterPerformaceSummary | null;
 
   loadData() {
@@ -43,11 +43,13 @@ export class GeekieClassPerfComponent implements OnInit {
           let itemResumo: ChapterPerformaceSummary = {
             idGeekie: lista[i].idGeekie,
             nomeAluno: lista[i].nomeAluno,
+            grade: lista[i].grade,
             recebidas: 0,
             quantidadeEntregas: 0,
           }
           if (index >= 0){
             resumo[index].detalhe = new MatTableDataSource(detalhe)
+            resumo[index].engajamento = (resumo[index].quantidadeEntregas / resumo[index].recebidas).toLocaleString("pr-br", {style: "percent"})
             detalhe=[]
           }
           resumo.push(itemResumo)
