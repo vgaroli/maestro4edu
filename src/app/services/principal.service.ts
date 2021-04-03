@@ -71,8 +71,8 @@ export class PrincipalService {
                   this.cargos = conta.cargos
                   if (conta.ultimoUpdateClassroom){
                     this.ultimoUpdateClassroom = conta.ultimoUpdateClassroom.toDate()
-                    this.ultimoUpdateClassroom = new Date(1900,1,1)
                   } else {
+                    this.ultimoUpdateClassroom = new Date(1900,1,1)
                     conta.ultimoUpdateClassroom = firebase.firestore.Timestamp.fromDate(this.ultimoUpdateClassroom)
                     this.updateConta(conta)
                   }
@@ -83,14 +83,15 @@ export class PrincipalService {
                       this.firestore.collection<AnoLetivo>(`escolas/${this.escola}/anosLetivos`)
                         .valueChanges().subscribe(anos => {
                             this.anosLetivos = anos
-                            this.tokensLoaded = true
                             if(this.cargos.indexOf('aluno')==-1){
                               this.firestore.collection<Docente>(`escolas/${this.escola}/anosLetivos/${this.anoLetivo}/docentes`)
                               .doc(this.idGoogle).valueChanges().subscribe(docente => {
                                 this.salas = docente.salas
+                                this.tokensLoaded = true
                                 this.okTokens.emit(true)
                               })
                             } else {
+                              this.tokensLoaded = true
                               this.okTokens.emit(true)
                             }
                           })
