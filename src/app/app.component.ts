@@ -35,7 +35,7 @@ export class AppComponent {
     this.principalService.logout()
   }
 
-  login(){
+  login() {
     this.principalService.login()
   }
 

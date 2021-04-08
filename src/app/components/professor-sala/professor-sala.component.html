@@ -1,1 +1,9 @@
 <p>professor-sala works!</p>
+<button printSectionId="demo" ngxPrint>Imprimir</button>
+<div class="grid-container" id="demo">
+    <ng-container *ngFor="let sala of salas">
+        <div>{{ sala.sala }}</div>
+        <div>{{ sala.nomeDisciplina }}</div>
+        <div>{{ sala.diario }}</div>
+    </ng-container>
+</div>

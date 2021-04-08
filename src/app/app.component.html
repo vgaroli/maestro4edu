@@ -19,20 +19,28 @@
         <span>Boletim</span>
       </a>
       <a mat-list-item routerLink="/pratica-admin">
-        <mat-icon>query_stats</mat-icon>
+        <mat-icon>markunread_mailbox</mat-icon>
         <span>Banco de práticas</span>
       </a>
       <a mat-list-item routerLink="/avaliacao-admin">
-        <mat-icon>query_stats</mat-icon>
+        <mat-icon>list</mat-icon>
         <span>Avaliações (#Itens)</span>
       </a>
       <a mat-list-item routerLink="/users-admin">
-        <mat-icon>query_stats</mat-icon>
+        <mat-icon>account_box</mat-icon>
         <span>Usuários e grupos</span>
       </a>
       <a mat-list-item routerLink="/dash-tarefas">
-        <mat-icon>query_stats</mat-icon>
+        <mat-icon>layers</mat-icon>
         <span>Situação de tarefas</span>
+      </a>
+      <a mat-list-item routerLink="/professor-admin">
+        <mat-icon>layers</mat-icon>
+        <span>Professor</span>
+      </a>
+      <a mat-list-item routerLink="/aluno-dash">
+        <mat-icon>layers</mat-icon>
+        <span>Alunos dashboard</span>
       </a>
     <ng-container *ngFor="let menu of menus">
         <a mat-list-item [routerLink]="menu.routerLink">

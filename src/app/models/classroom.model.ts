@@ -62,6 +62,22 @@ export interface EntregasClassroom{
   pendentesAcumulado: number
 }
 
+export interface SubmissaoClassroom{
+  aproveitamento: number
+  dataCriacao: firebase.firestore.Timestamp
+  dataEntrega: firebase.firestore.Timestamp
+  dataUpdate: firebase.firestore.Timestamp
+  idGoogle: string
+  idSala: number
+  idSubmission: string
+  nota: number
+  notaMaxima: number
+  pendente: boolean
+  prazoEntrega: firebase.firestore.Timestamp
+  status: string
+  tarefa: string
+}
+
 export interface EngajamentoClassroom{
   idGoogle: string,
   semana: number,

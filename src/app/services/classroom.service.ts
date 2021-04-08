@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissionState } from './../models/classroom.model';
+import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissionState, SubmissaoClassroom } from './../models/classroom.model';
 import { PrincipalService } from './principal.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable, Output, EventEmitter } from '@angular/core';
@@ -101,5 +102,11 @@ export class ClassroomService {
           })
       }
     })
+  }
+
+  listResumo(idGoogle:string): Observable<SubmissaoClassroom[]> {
+    let colecao = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/submissionsClassroom`
+    return this.firestore.collection<SubmissaoClassroom>(colecao, ref => ref.where('idGoogle','==',idGoogle).orderBy('idSala').orderBy('tarefa'))
+    .valueChanges()
   }
 }

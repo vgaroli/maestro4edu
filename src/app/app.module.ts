@@ -43,6 +43,10 @@ import { HomeComponent } from './views/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashTarefasComponent } from './views/dash-tarefas/dash-tarefas.component';
 import { GeekieClassPerfComponent } from './components/geekie-class-perf/geekie-class-perf.component';
+import { LetrusDataComponent } from './components/letrus-data/letrus-data.component';
+
+//print
+import {NgxPrintModule} from 'ngx-print';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -132,6 +136,7 @@ const dbConfig: DBConfig  = {
     HomeComponent,
     DashTarefasComponent,
     GeekieClassPerfComponent,
+    LetrusDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,7 +155,8 @@ const dbConfig: DBConfig  = {
     MatSortModule,
     HttpClientModule,
     MatInputModule,
-
+    NgxPrintModule,
+    
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatAutocompleteModule,

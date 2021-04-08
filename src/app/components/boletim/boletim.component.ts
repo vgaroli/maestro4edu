@@ -15,7 +15,7 @@ export class BoletimComponent implements AfterViewInit  {
   colunasGrid=0
   customStyle:string=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
 
-  @Input() idGoogle: string = "100549381171868802195"
+  @Input() idGoogle: string = "108914885005634059304"
   @Input() idGrade: string
 
   constructor(private firestore: AngularFirestore, private principal: PrincipalService) { }
