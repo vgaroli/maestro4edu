@@ -1,4 +1,13 @@
 <p>classroom-resumo works!</p>
-<ng-container *ngFor="let submissao of submissoes">
-   <div> {{submissao.tarefa}}</div>
+<ng-container *ngFor="let submissao of agrupamentosSubmissoes">
+   <div>  {{submissao.nomeSala}} </div>
+   <div>  Tarefas: {{submissao.tarefas}} </div>
+   <div>  Entregues: {{submissao.entregues}}</div>
+   <div>  Entregues com atraso: {{submissao.entreguesAtraso}}</div>
+   <div>  Pendentes: {{submissao.pendentes}}</div>
+   <div>  Não Entregues: {{submissao.naoEntregues}}</div>
+   <div>  Não Avaliadas: {{submissao.naoAvaliada}}</div>
+   <div>  Performance das entregas: {{submissao.performanceEntregas | percent:'1.2-2'}}</div>
+   <div>  Performance geral: {{submissao.performanceGeral | percent:'1.2-2'}}</div>
+   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 </ng-container>

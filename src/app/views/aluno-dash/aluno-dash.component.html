@@ -1,2 +1,11 @@
-<p>aluno-dash works!</p>
-<app-classroom-resumo></app-classroom-resumo>
+<div style="width:1200px">
+    <div class="grid-container">
+        <ng-container *ngFor="let sala of salas">
+            <div class="botao"  [innerHTML]="sala.sala" (click)="buscaSala(sala.sala)"></div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-container *ngFor="let aluno of alunos">
+    <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>
+</ng-container>

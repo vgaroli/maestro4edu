@@ -21,7 +21,7 @@ export interface CourseNumbers{
 export interface Course{
   id: string,
   name: string,
-  section: string,
+  section?: string,
   descriptionHeading: string,
   description?: string,
   room?: string,
@@ -69,6 +69,7 @@ export interface SubmissaoClassroom{
   dataUpdate: firebase.firestore.Timestamp
   idGoogle: string
   idSala: number
+  sala?: string
   idSubmission: string
   nota: number
   notaMaxima: number
@@ -76,6 +77,21 @@ export interface SubmissaoClassroom{
   prazoEntrega: firebase.firestore.Timestamp
   status: string
   tarefa: string
+}
+
+export interface AgrupamentoSubmissao{
+  idGoogle: string
+  sala: string
+  tarefas: number
+  entregues: number
+  naoEntregues: number
+  naoAvaliada: number
+  entreguesAtraso: number
+  pendentes: number
+  engajamento: number
+  performanceEntregas: number
+  performanceGeral: number
+  salaGrade: string
 }
 
 export interface EngajamentoClassroom{

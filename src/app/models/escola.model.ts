@@ -1,3 +1,4 @@
+import { DriveFile } from './drive.model';
 import { DadosDisciplinaBoletim } from './boletim.model';
 import { DocumentReference } from '@angular/fire/firestore';
  
@@ -27,4 +28,13 @@ export interface Sala{
   diario: string
   disciplina: string
   sala: string
+}
+
+export interface SalaGrade{
+  curso: string
+  divisao: string
+  grades: string[]
+  id?: string
+  sala: string
+  nomeSala: string
 }

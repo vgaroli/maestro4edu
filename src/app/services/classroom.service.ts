@@ -1,9 +1,10 @@
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissionState, SubmissaoClassroom } from './../models/classroom.model';
+import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissionState, SubmissaoClassroom, AgrupamentoSubmissao } from './../models/classroom.model';
 import { PrincipalService } from './principal.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable, Output, EventEmitter } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class ClassroomService {
 
   @Output() cursosOk = new EventEmitter<boolean>()
+  @Output() salaAjustada = new EventEmitter<boolean>()
 
   constructor(private http: HttpClient, public principal: PrincipalService, public firestore: AngularFirestore) { }
   listaCursos: Course[] = []
@@ -81,7 +83,7 @@ export class ClassroomService {
       { headers: new HttpHeaders().set("Authorization", `Bearer ${this.principal.accessToken}`) }).subscribe(resultado => {
         this.listaCursos = resultado["courses"]
         if (isProfessor) {
-          this.listaMyCursos = this.listaCursos.filter(curso => curso.ownerId == this.principal.idGoogle)
+          this.listaMyCursos = this.listaCursos//.filter(curso => curso.ownerId == this.principal.idGoogle)
         } else {
           this.listaMyCursos = this.listaCursos
         }
@@ -108,5 +110,28 @@ export class ClassroomService {
     let colecao = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/submissionsClassroom`
     return this.firestore.collection<SubmissaoClassroom>(colecao, ref => ref.where('idGoogle','==',idGoogle).orderBy('idSala').orderBy('tarefa'))
     .valueChanges()
+  }
+
+  listResumoGeral(idGoogle:string): Observable<AgrupamentoSubmissao[]> {
+    let colecao = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/submissionsGeralAlunoClassroom`
+    return this.firestore.collection<AgrupamentoSubmissao>(colecao, ref => ref.where('idGoogle','==',idGoogle))
+    .valueChanges()
+  }
+
+  listResumoSala(idGoogle:string): Observable<AgrupamentoSubmissao[]> {
+    let colecao = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/submissionsSalaAlunoClassroom`
+    return this.firestore.collection<AgrupamentoSubmissao>(colecao, ref => ref.where('idGoogle','==',idGoogle))
+    .valueChanges()
+  }
+
+  ajusteNomeSala(submissoes: SubmissaoClassroom[]){
+    let colecao = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/salasClassroom`
+    this.firestore.collection<Course>(colecao).valueChanges().pipe(take(1)).subscribe(cursos =>{
+      submissoes.forEach(item =>{
+        let cursoF = cursos.filter(c => c.id === item.idSala.toString())
+        item.sala = cursoF[0].descriptionHeading + ((cursoF[0].section)? " - " + cursoF[0].section : "")
+      })
+      this.salaAjustada.emit(true)
+    })
   }
 }
