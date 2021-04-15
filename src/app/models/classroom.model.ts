@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { DateData, TimeOfDay, UserProfile } from './basic.model';
 import { DriveFolder, DriveFile, Form, SharedDriveFile } from './drive.model'
 import { YouTubeVideo }  from './youtube.model'
@@ -91,7 +92,11 @@ export interface AgrupamentoSubmissao{
   engajamento: number
   performanceEntregas: number
   performanceGeral: number
+  stylePerformanceGeral?:string
+  stylePerformanceEntregas?:string
+  styleEngajamento?:string
   salaGrade: string
+  nomeSala: string
 }
 
 export interface EngajamentoClassroom{

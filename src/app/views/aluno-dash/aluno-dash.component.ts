@@ -1,7 +1,7 @@
 import { EscolaService } from './../../services/escola.service';
 import { PrincipalService } from './../../services/principal.service';
 import { Component, OnInit } from '@angular/core';
-import { Sala, SalaGrade } from 'src/app/models/escola.model';
+import { AlunoSala, Sala, SalaGrade } from 'src/app/models/escola.model';
 
 @Component({
   selector: 'app-aluno-dash',
@@ -11,6 +11,7 @@ import { Sala, SalaGrade } from 'src/app/models/escola.model';
 export class AlunoDashComponent implements OnInit {
 
   salas: SalaGrade[]=[]
+  alunos: AlunoSala[]=[]
 
   constructor(private principal: PrincipalService, private escolaService: EscolaService) { }
 
@@ -28,8 +29,10 @@ export class AlunoDashComponent implements OnInit {
     })
   }
 
-  buscaSala(obj){
-    alert(obj)
+  buscaSala(sala: string){
+    this.escolaService.loadAlunosSala(sala).subscribe(alunosSala =>{
+      this.alunos=alunosSala
+    })
   }
 
 }

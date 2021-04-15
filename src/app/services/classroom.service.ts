@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissionState, SubmissaoClassroom, AgrupamentoSubmissao } from './../models/classroom.model';
+import { Course, CourseReport, CourseWork, CourseNumbers, StudentSubmission, SubmissaoClassroom, AgrupamentoSubmissao } from './../models/classroom.model';
 import { PrincipalService } from './principal.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable, Output, EventEmitter } from '@angular/core';

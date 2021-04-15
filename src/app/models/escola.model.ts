@@ -36,5 +36,11 @@ export interface SalaGrade{
   grades: string[]
   id?: string
   sala: string
+}
+
+export interface AlunoSala{
+  idGoogle: string
+  idSala: string
+  nomeAluno: string
   nomeSala: string
 }

@@ -1,13 +1,27 @@
-<p>classroom-resumo works!</p>
 <ng-container *ngFor="let submissao of agrupamentosSubmissoes">
-   <div>  {{submissao.nomeSala}} </div>
-   <div>  Tarefas: {{submissao.tarefas}} </div>
-   <div>  Entregues: {{submissao.entregues}}</div>
-   <div>  Entregues com atraso: {{submissao.entreguesAtraso}}</div>
-   <div>  Pendentes: {{submissao.pendentes}}</div>
-   <div>  Não Entregues: {{submissao.naoEntregues}}</div>
-   <div>  Não Avaliadas: {{submissao.naoAvaliada}}</div>
-   <div>  Performance das entregas: {{submissao.performanceEntregas | percent:'1.2-2'}}</div>
-   <div>  Performance geral: {{submissao.performanceGeral | percent:'1.2-2'}}</div>
-   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+   <div class="grid-classroom">
+      <ng-container *ngIf="detalhe">
+         <div> Sala: </div>
+         <div [style]="style"> {{submissao.nomeSala}} </div>
+      </ng-container>
+      <div> Tarefas: </div>
+      <div [style]="style"> {{submissao.tarefas}} </div>
+      <div> Entregues no prazo: </div>
+      <div [style]="style"> {{submissao.entregues}}</div>
+      <div> Engajamento: </div>
+      <div [style]="submissao.styleEngajamento"> {{submissao.engajamento | percent:'1.2-2'}}</div>
+      <div> Entregues com atraso: </div>
+      <div [style]="style"> {{submissao.entreguesAtraso}}</div>
+      <div> Pendentes: </div>
+      <div [style]="style"> {{submissao.pendentes}}</div>
+      <div> Não Entregues: </div>
+      <div [style]="style"> {{submissao.naoEntregues}}</div>
+      <div> Não Avaliadas: </div>
+      <div [style]="style"> {{submissao.naoAvaliada}}</div>
+      <div> Performance das entregas: </div>
+      <div [style]="submissao.stylePerformanceEntregas"> {{submissao.performanceEntregas | percent:'1.2-2'}}</div>
+      <div> Performance geral: </div>
+      <div [style]="submissao.stylePerformanceGeral"> {{submissao.performanceGeral | percent:'1.2-2'}}</div>
+   </div>
+   <br />
 </ng-container>

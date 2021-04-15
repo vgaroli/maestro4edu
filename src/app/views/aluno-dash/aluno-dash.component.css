@@ -4,6 +4,7 @@
     grid-gap: 1px;
     background-color: #000000;
     padding: 1px;
+    margin-bottom: 5px;
   }
   
   .grid-container > div {
@@ -17,4 +18,19 @@
 
   .botao:active  {
       background-color: chocolate;
+  }
+
+  .content{
+    margin-left: 20px;
+  }
+
+  .contentClass{
+    display: grid;
+    grid-template-columns: 300px 900px;
+  }
+
+  .contentItem{
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    margin-bottom: 5px;
   }
