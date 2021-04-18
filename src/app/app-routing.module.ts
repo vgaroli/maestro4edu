@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'pratica-admin', loadChildren: () => import('./views/pratica-admin/pratica-admin.module').then(m => m.PraticaAdminModule) },
   { path: 'avaliacao-admin', loadChildren: () => import('./views/avaliacao-admin/avaliacao-admin.module').then(m => m.AvaliacaoAdminModule) },
   { path: 'users-admin', loadChildren: () => import('./views/users-admin/users-admin.module').then(m => m.UsersAdminModule) },
+  { path: 'aluno-dash/:uuid', loadChildren: () => import('./views/aluno-dash/aluno-dash.module').then(m => m.AlunoDashModule) },
   { path: 'aluno-dash', loadChildren: () => import('./views/aluno-dash/aluno-dash.module').then(m => m.AlunoDashModule) },
   { path: 'boletim-admin', loadChildren: () => import('./views/boletim-admin/boletim-admin.module').then(m => m.BoletimAdminModule) },
   { path: 'professor-admin', loadChildren: () => import('./views/professor-admin/professor-admin.module').then(m => m.ProfessorAdminModule) }]

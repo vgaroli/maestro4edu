@@ -1,10 +1,10 @@
 import { map } from 'rxjs/operators';
 import { Escola, AnoLetivo, Docente, Sala } from './../models/escola.model';
-import { Conta } from './../models/basic.model';
+import { AnonimoData, Conta } from './../models/basic.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import { first } from 'rxjs/operators';
 
@@ -16,6 +16,8 @@ export class PrincipalService {
 
   private contagem = new Subject<number>()
   tokensLoaded=false
+  isAnonimo=false
+  naoAnonimo=true
   nContagem: number = 0
   accessToken: string = ""
   escola: string=""
@@ -39,9 +41,13 @@ export class PrincipalService {
 
   contagem$ = this.contagem.asObservable()
 
+  loadAnonimoData(uuid):Observable<AnonimoData[]>{
+    return this.firestore.collection<AnonimoData>('uuids', ref => ref.where('uuid', "==", uuid)).valueChanges()
+  }
+
 
   updateConta(conta: Conta){
-    let colect =    this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', conta.conta))
+    this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', conta.conta))
     .snapshotChanges().pipe(first()).subscribe(snaps => {
       this.firestore.collection<Conta>('contas').doc(snaps[0].payload.doc.id).update(conta)
     }
@@ -58,6 +64,7 @@ export class PrincipalService {
           this.idUser = state.uid
           this.autenticado = true
           this.conta = state.email
+          //this.conta = 'sueli.cain@colegiomaterdei.net'
           if (!this.accessToken) {
             this.login()
           } else {

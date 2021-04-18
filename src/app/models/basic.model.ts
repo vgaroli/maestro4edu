@@ -67,3 +67,10 @@ export interface Conta{
   ultimoUpdateClassroom?: firebase.firestore.Timestamp
 }
 
+export interface AnonimoData{
+  idGoogle: string
+  uuid: string
+  anoLetivo: number
+  escola:string
+}
+

@@ -1,4 +1,4 @@
-import { AgrupamentoSubmissao, SubmissaoClassroom } from './../../models/classroom.model';
+import { AgrupamentoSubmissao, SubmissaoClassroom, EngajamentoClassroom } from './../../models/classroom.model';
 import { PrincipalService } from './../../services/principal.service';
 import { ClassroomService } from './../../services/classroom.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -23,29 +23,38 @@ export class ClassroomResumoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.principal.tokensLoaded) {
+    if (this.principal.tokensLoaded || this.principal.isAnonimo) {
       if (this.detalhe) {
         this.loadResumoSala()
-        this.style = "width:300px"
+        this.style = "width:350px;"
+        this.styleHeader ="width:350px; color: white; font-weight: bold; background-color: #673AB7;"
       } else {
+        this.styleHeader ="color: white; font-weight: bold; background-color: #673AB7;"
         this.loadResumoGeral()
       }
     } else {
       this.principal.okTokens.subscribe(() => {
         if (this.detalhe) {
           this.loadResumoSala()
-          this.style = "width:300px"
+          this.style = "width:350px"
+          this.styleHeader ="width:350px; font-weight: bold; color: white; background-color: #673AB7;"
         } else {
+          this.styleHeader ="color: white; font-weight: bold; background-color: #673AB7;"
           this.loadResumoGeral()
         }
       })
     }
   }
 
+  loadTarefas(){
+    alert("oi")
+  }
+
   loadResumoGeral() {
     if (this.idGoogle) {
       this.classroom.listResumoGeral(this.idGoogle).subscribe(resumo => {
         this.agrupamentosSubmissoes = resumo
+        this.ajusteStyle()
       })
     }
   }
@@ -54,6 +63,7 @@ export class ClassroomResumoComponent implements OnInit {
     if (this.idGoogle) {
       this.classroom.listResumoSala(this.idGoogle).subscribe(resumo => {
         this.agrupamentosSubmissoes = resumo
+        this.ajusteStyle()
       })
     }
   }
@@ -64,9 +74,9 @@ export class ClassroomResumoComponent implements OnInit {
       agrupamento.stylePerformanceEntregas = ""
       agrupamento.stylePerformanceGeral = ""
       if (this.detalhe) {
-        agrupamento.styleEngajamento = "width:300px "
-        agrupamento.stylePerformanceEntregas = "width:300px "
-        agrupamento.stylePerformanceGeral = "width:300px "
+        agrupamento.styleEngajamento = "width:350px; "
+        agrupamento.stylePerformanceEntregas = "width:350px; "
+        agrupamento.stylePerformanceGeral = "width:350px; "
       }
       if(agrupamento.engajamento < 0.7){
         agrupamento.styleEngajamento += "background-color: yellow;"
@@ -85,6 +95,12 @@ export class ClassroomResumoComponent implements OnInit {
       }
       if(agrupamento.performanceGeral < 0.6){
         agrupamento.stylePerformanceGeral += "background-color: tomato;"
+      }
+      if(agrupamento.performanceEntregas == 0 && agrupamento.engajamento != 0){
+        agrupamento.stylePerformanceEntregas += "background-color: white; color: white;"
+      }
+      if(agrupamento.performanceGeral == 0 && agrupamento.engajamento != 0){
+        agrupamento.stylePerformanceGeral += "background-color: white; color: white;"
       }
     })
     let x = 10

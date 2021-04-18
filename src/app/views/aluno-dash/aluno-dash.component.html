@@ -1,5 +1,5 @@
 <div class="content">
-    <div style="width:1200px">
+    <div *ngIf="isCoordenador" style="width:1200px">
         <div class="grid-container">
             <ng-container *ngFor="let sala of salas">
                 <div class="botao" [innerHTML]="sala.sala" (click)="buscaSala(sala.sala)"></div>
@@ -8,9 +8,9 @@
     </div>
 
     <ng-container *ngFor="let aluno of alunos">
+        <div class="divCenter800" style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
         <div class="contentClass">
             <div class="contentItem">
-                <div style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>
             </div>
             <div class="contentItem">

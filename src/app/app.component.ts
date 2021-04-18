@@ -2,6 +2,7 @@ import { AnoLetivo } from './models/escola.model';
 import { PrincipalService } from './services/principal.service';
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,8 +16,22 @@ export class AppComponent {
   escola: string = ""
   anos: AnoLetivo[]
   anoLetivo: number
+  showNavegacao:boolean= false
 
   constructor(private principalService: PrincipalService) {
+    let url = window.location.href
+    if (url.indexOf("UUID") === -1){
+      this.principalService.isAnonimo=false
+      this.principalService.naoAnonimo=true
+      this.showNavegacao=true
+      this.loadCredential()
+    } else {
+      this.principalService.isAnonimo=true
+      this.principalService.naoAnonimo=false
+    }
+  }
+
+  loadCredential() {
     this.principalService.checkToken()
     this.principalService.okTokens.subscribe(
       value => {

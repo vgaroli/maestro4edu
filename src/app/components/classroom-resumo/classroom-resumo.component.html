@@ -1,8 +1,12 @@
 <ng-container *ngFor="let submissao of agrupamentosSubmissoes">
    <div class="grid-classroom">
       <ng-container *ngIf="detalhe">
-         <div> Sala: </div>
-         <div [style]="style"> {{submissao.nomeSala}} </div>
+         <div style="color: white; font-weight: bold; background-color: #673AB7;"> Sala: </div>
+         <div [style]="styleHeader"> {{submissao.nomeSala}}
+            <a style="cursor: pointer;" (click)="loadTarefas()">
+               <mat-icon aria-hidden="false" aria-label="acessar lista">call_made</mat-icon>
+             </a>   
+         </div>
       </ng-container>
       <div> Tarefas: </div>
       <div [style]="style"> {{submissao.tarefas}} </div>

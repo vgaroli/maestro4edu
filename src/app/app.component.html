@@ -1,6 +1,6 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #start  fixedInViewport="true" fixedTopGap="64" (click)="start.close()">
-    <mat-nav-list>
+    <mat-nav-list *ngIf="showNavegacao">
 
       <a mat-list-item routerLink="">
           <mat-icon>home</mat-icon>
@@ -54,11 +54,12 @@
 </mat-sidenav>
 
   <mat-toolbar class="header" color="primary">
-    <div>
+    <div *ngIf="showNavegacao">
       <button class="material-icons" style="vertical-align: middle; cursor: pointer;" (click)="start.toggle()">
         menu
       </button>
-      {{ escola }} - <select name="anoLetivo" id="anoLetivo">
+      {{ escola }} - 
+      <select name="anoLetivo" id="anoLetivo">
         <option *ngFor="let ano of anos" [value]="ano.ano"
         [selected]="anoLetivo === ano.ano">{{ ano.ano }}</option>
       </select>
@@ -66,7 +67,7 @@
     </div>
     <div>
     </div>
-    <div>
+    <div *ngIf="showNavegacao">
       <div *ngIf="(autenticado); else anonimo">
         <img class="user-avatar" [src]="photoURL"  [matMenuTriggerFor]="menu">
         <mat-menu #menu="matMenu">
