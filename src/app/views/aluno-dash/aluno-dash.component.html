@@ -12,10 +12,11 @@
         <div class="contentClass">
             <div class="contentItem">
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>
+                <button (click)="detalheClassroom()">Detalhe Classroom</button>
             </div>
-            <div class="contentItem">
-                <app-classroom-resumo [idGoogle]="aluno.idGoogle" [detalhe]="true"></app-classroom-resumo>
-            </div>
+        </div>
+        <div *ngIf="showDetalheClassroom" class="contentItem">
+            <app-classroom-resumo [idGoogle]="aluno.idGoogle" [detalhe]="true"></app-classroom-resumo>
         </div>
     </ng-container>
 </div>

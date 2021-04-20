@@ -69,8 +69,10 @@ export interface Conta{
 
 export interface AnonimoData{
   idGoogle: string
+  idGeekie?: string
   uuid: string
   anoLetivo: number
   escola:string
+  nomeAluno: string
 }
 

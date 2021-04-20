@@ -20,8 +20,8 @@
       <div [style]="style"> {{submissao.pendentes}}</div>
       <div> Não Entregues: </div>
       <div [style]="style"> {{submissao.naoEntregues}}</div>
-      <div> Não Avaliadas: </div>
-      <div [style]="style"> {{submissao.naoAvaliada}}</div>
+      <div *ngIf="showNaoAvaliadas"> Não Avaliadas: </div>
+      <div *ngIf="showNaoAvaliadas" [style]="style"> {{submissao.naoAvaliada}}</div>
       <div> Performance das entregas: </div>
       <div [style]="submissao.stylePerformanceEntregas"> {{submissao.performanceEntregas | percent:'1.2-2'}}</div>
       <div> Performance geral: </div>

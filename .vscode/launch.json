@@ -10,7 +10,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200/aluno-dash/UUID4b2fdf60-0fc1-4367-9ffb-e6c403b76e8a",
+            "url": "http://localhost:4200/aluno-dash/UUID4968979b-5925-4e75-8a61-59349972e1ac",
             "webRoot": "${workspaceFolder}"
         }
     ]

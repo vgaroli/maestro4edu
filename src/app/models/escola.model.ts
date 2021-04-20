@@ -40,6 +40,7 @@ export interface SalaGrade{
 
 export interface AlunoSala{
   idGoogle: string
+  idGeekie?:string
   idSala: string
   nomeAluno: string
   nomeSala: string

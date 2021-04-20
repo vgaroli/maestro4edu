@@ -17,6 +17,8 @@ export class AppComponent {
   anos: AnoLetivo[]
   anoLetivo: number
   showNavegacao:boolean= false
+  showNomeAluno:boolean=false
+  nomeAluno = this.principalService.nomePessoa
 
   constructor(private principalService: PrincipalService) {
     let url = window.location.href
@@ -28,6 +30,7 @@ export class AppComponent {
     } else {
       this.principalService.isAnonimo=true
       this.principalService.naoAnonimo=false
+      this.showNomeAluno=true
     }
   }
 

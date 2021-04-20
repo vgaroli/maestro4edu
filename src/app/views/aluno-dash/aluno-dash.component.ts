@@ -3,6 +3,7 @@ import { PrincipalService } from './../../services/principal.service';
 import { Component, OnInit } from '@angular/core';
 import { AlunoSala, SalaGrade } from 'src/app/models/escola.model';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-aluno-dash',
@@ -15,6 +16,7 @@ export class AlunoDashComponent implements OnInit {
   alunos: AlunoSala[] = []
   isCoordenador: boolean = false
   isAluno: boolean = false
+  showDetalheClassroom: boolean = false
 
   constructor(private principal: PrincipalService,
     private escolaService: EscolaService,
@@ -35,15 +37,19 @@ export class AlunoDashComponent implements OnInit {
   }
 
   loadAnonimoData() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.pipe(take(1)).subscribe(params => {
       let uuid = params.get("uuid")
-      this.principal.loadAnonimoData(uuid).subscribe(dados => {
-        if (dados){
+      this.principal.loadAnonimoData(uuid).pipe(take(1)).subscribe(dados => {
+        if (dados) {
           this.principal.escola = dados[0].escola
-          this.principal.anoLetivo =dados[0].anoLetivo
-          this.principal.idGoogle=dados[0].idGoogle
-          this.isAluno =true
-          this.isCoordenador=false
+          this.principal.anoLetivo = dados[0].anoLetivo
+          this.principal.idGoogle = dados[0].idGoogle
+          this.principal.nomePessoa = dados[0].nomeAluno
+          if (dados[0].idGeekie) {
+            this.principal.idGeekie = dados[0].idGeekie
+          }
+          this.isAluno = true
+          this.isCoordenador = false
           this.loadSalas()
         }
       })
@@ -64,8 +70,9 @@ export class AlunoDashComponent implements OnInit {
     if (this.isAluno) {
       let alunoSala: AlunoSala = {
         idGoogle: this.principal.idGoogle,
+        idGeekie: this.principal.idGeekie,
         idSala: "",
-        nomeAluno: "",
+        nomeAluno: this.principal.nomePessoa,
         nomeSala: ""
       }
       this.alunos.push(alunoSala)
@@ -78,4 +85,8 @@ export class AlunoDashComponent implements OnInit {
     })
   }
 
+
+  detalheClassroom() {
+    this.showDetalheClassroom = (!this.showDetalheClassroom)
+  }
 }

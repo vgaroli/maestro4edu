@@ -16,6 +16,7 @@ export class ClassroomResumoComponent implements OnInit {
   @Input() detalhe: boolean = false
   style = ""
   styleHeader = ""
+  showNaoAvaliadas=false
 
   constructor(private classroom: ClassroomService, private principal: PrincipalService) { }
   submissoes: SubmissaoClassroom[]
@@ -24,6 +25,7 @@ export class ClassroomResumoComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.principal.tokensLoaded || this.principal.isAnonimo) {
+      this.showNaoAvaliadas = (this.principal.cargos.indexOf("professor")>-1 || this.principal.cargos.indexOf("coordenador")>-1)
       if (this.detalhe) {
         this.loadResumoSala()
         this.style = "width:350px;"
@@ -34,6 +36,7 @@ export class ClassroomResumoComponent implements OnInit {
       }
     } else {
       this.principal.okTokens.subscribe(() => {
+        this.showNaoAvaliadas = (this.principal.cargos.indexOf("professor")>-1 || this.principal.cargos.indexOf("coordenador")>-1)
         if (this.detalhe) {
           this.loadResumoSala()
           this.style = "width:350px"

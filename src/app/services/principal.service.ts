@@ -16,6 +16,7 @@ export class PrincipalService {
 
   private contagem = new Subject<number>()
   tokensLoaded=false
+  nomePessoa=""
   isAnonimo=false
   naoAnonimo=true
   nContagem: number = 0
@@ -27,6 +28,7 @@ export class PrincipalService {
   photoURL: string = ""
   idUser: string = ""
   idGoogle: string = ""
+  idGeekie: string=""
   conta: string = ""
   anoLetivo: number
   anosLetivos: AnoLetivo[]
@@ -64,7 +66,7 @@ export class PrincipalService {
           this.idUser = state.uid
           this.autenticado = true
           this.conta = state.email
-          //this.conta = 'sueli.cain@colegiomaterdei.net'
+          this.conta = 'rgina.ratto@colegiomaterdei.net'
           if (!this.accessToken) {
             this.login()
           } else {
@@ -74,6 +76,9 @@ export class PrincipalService {
                 let conta = contas[0]
                 if (conta) {
                   this.idGoogle = conta.idGoogle
+                  if (conta.idGeekie){
+                    this.idGeekie = conta.idGeekie
+                  }
                   this.escola = conta.escola
                   this.cargos = conta.cargos
                   if (conta.ultimoUpdateClassroom){
@@ -113,6 +118,8 @@ export class PrincipalService {
     let credencial: any = this.auth.idToken
     console.log(credencial)
   }
+
+  
 
   logout() {
     this.auth.signOut()
