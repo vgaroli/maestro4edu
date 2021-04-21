@@ -1,1 +1,19 @@
-<p>letrus-resumo works!</p>
+<div class="divCenter300"><img style="width: 30px;" src="../../../assets/letrus.png" alt="letrus"></div>
+<ng-container *ngFor="let atividade of agrupamento">
+    <div class="grid-classroom">
+        <div> Tarefas: </div>
+        <div [style]="style"> {{atividade.atividades}} </div>
+        <div> Tarefas entregues: </div>
+        <div [style]="style"> {{atividade.atividadesEntregues}} </div>
+        <div> Reescritas: </div>
+        <div [style]="style"> {{atividade.reescritas}} </div>
+        <div> Reescritas entregues: </div>
+        <div [style]="style"> {{atividade.reescritasEntregues}} </div>
+        <div> Engajamento: </div>
+        <div [style]="atividade.styleEngajamento"> {{atividade.engajamento  | percent:'1.2-2'}} </div>
+        <div> Aprov. entregas avaliadas: </div>
+        <div [style]="atividade.stylePerformanceEntregas"> {{atividade.performanceEntregas  | percent:'1.2-2'}} </div>
+        <div> Aproveitamento real: </div>
+        <div [style]="atividade.stylePerformanceGeral"> {{atividade.performanceGeral  | percent:'1.2-2'}} </div>
+    </div>
+</ng-container>

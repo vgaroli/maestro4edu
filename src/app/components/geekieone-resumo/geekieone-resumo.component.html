@@ -1,1 +1,15 @@
-<p>geekieone-resumo works!</p>
+<div class="divCenter300"><img style="width: 30px;" src="../../../assets/geekie.png" alt="Geekie One"></div>
+<ng-container *ngFor="let capitulo of agrupamento">
+    <div class="grid-classroom">
+        <div> Tarefas: </div>
+        <div [style]="style"> {{capitulo.tarefas}} </div>
+        <div> Tarefas entregues: </div>
+        <div [style]="style"> {{capitulo.tarefasEntregues}} </div>
+        <div> Engajamento: </div>
+        <div [style]="capitulo.styleEngajamento"> {{capitulo.engajamento  | percent:'1.2-2'}} </div>
+        <div> Aprov. entregas avaliadas: </div>
+        <div [style]="capitulo.stylePerformanceEntregas"> {{capitulo.aproveitamentoEntregas  | percent:'1.2-2'}} </div>
+        <div> Aproveitamento real: </div>
+        <div [style]="capitulo.stylePerformanceGeral"> {{capitulo.aproveitamentoGeral  | percent:'1.2-2'}} </div>
+    </div>
+</ng-container>

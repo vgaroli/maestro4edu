@@ -26,11 +26,18 @@
 
   .contentClass{
     display: grid;
-    grid-template-columns: 300px 900px;
+    grid-template-columns: 300px 300px 300px;
   }
 
   .contentItem{
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(71, 64, 64, 0.8);
     padding: 5px;
     margin-bottom: 5px;
+  }
+
+  .contentDetail{
+    border: 1px solid rgba(71, 64, 64, 0.8);
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 890px;
   }

@@ -22,3 +22,16 @@ export interface ChapterPerformaceSummary{
     engajamento?:string
     detalhe?: ChapterPerformace[] | MatTableDataSource<ChapterPerformace>
 }
+
+export interface AgrupamentoAlunoChapterPerformance{
+    idGeekie: string
+    disciplina: string
+    tarefas: number
+    tarefasEntregues: number
+    engajamento: number
+    aproveitamentoEntregas: number
+    aproveitamentoGeral: number  
+    stylePerformanceGeral?:string
+    stylePerformanceEntregas?:string
+    styleEngajamento?:string
+}

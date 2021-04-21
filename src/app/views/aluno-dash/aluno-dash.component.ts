@@ -17,6 +17,8 @@ export class AlunoDashComponent implements OnInit {
   isCoordenador: boolean = false
   isAluno: boolean = false
   showDetalheClassroom: boolean = false
+  showDetalheGeekie: boolean = false
+  showDetalheLetrus: boolean = false
 
   constructor(private principal: PrincipalService,
     private escolaService: EscolaService,
@@ -88,5 +90,25 @@ export class AlunoDashComponent implements OnInit {
 
   detalheClassroom() {
     this.showDetalheClassroom = (!this.showDetalheClassroom)
+    if(this.showDetalheClassroom){
+      this.showDetalheGeekie=false
+      this.showDetalheLetrus=false
+    }
+  }
+
+  detalheGeekie() {
+    this.showDetalheGeekie = (!this.showDetalheGeekie)
+    if(this.showDetalheGeekie){
+      this.showDetalheClassroom=false
+      this.showDetalheLetrus=false
+    }
+  }
+
+  detalheLetrus() {
+    this.showDetalheLetrus = (!this.showDetalheLetrus)
+    if(this.showDetalheLetrus){
+      this.showDetalheClassroom=false
+      this.showDetalheGeekie=false
+    }
   }
 }

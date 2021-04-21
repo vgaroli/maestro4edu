@@ -1,11 +1,13 @@
+<div class="divCenter300"><img style="width: 30px;" src="../../../assets/classroom.jpg" alt="Google Sala de Aula"></div>
 <ng-container *ngFor="let submissao of agrupamentosSubmissoes">
    <div class="grid-classroom">
       <ng-container *ngIf="detalhe">
          <div style="color: white; font-weight: bold; background-color: #673AB7;"> Sala: </div>
          <div [style]="styleHeader"> {{submissao.nomeSala}}
+            <!--
             <a style="cursor: pointer;" (click)="loadTarefas()">
                <mat-icon aria-hidden="false" aria-label="acessar lista">call_made</mat-icon>
-             </a>   
+             </a>-->   
          </div>
       </ng-container>
       <div> Tarefas: </div>
@@ -22,9 +24,9 @@
       <div [style]="style"> {{submissao.naoEntregues}}</div>
       <div *ngIf="showNaoAvaliadas"> Não Avaliadas: </div>
       <div *ngIf="showNaoAvaliadas" [style]="style"> {{submissao.naoAvaliada}}</div>
-      <div> Performance das entregas: </div>
+      <div> Aprov. entregas avaliadas: </div>
       <div [style]="submissao.stylePerformanceEntregas"> {{submissao.performanceEntregas | percent:'1.2-2'}}</div>
-      <div> Performance geral: </div>
+      <div> Aproveitamento real: </div>
       <div [style]="submissao.stylePerformanceGeral"> {{submissao.performanceGeral | percent:'1.2-2'}}</div>
    </div>
    <br />

@@ -66,7 +66,7 @@ export class PrincipalService {
           this.idUser = state.uid
           this.autenticado = true
           this.conta = state.email
-          this.conta = 'rgina.ratto@colegiomaterdei.net'
+          //this.conta = 'regina.ratto@colegiomaterdei.net'
           if (!this.accessToken) {
             this.login()
           } else {

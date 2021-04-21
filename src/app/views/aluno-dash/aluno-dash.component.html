@@ -12,11 +12,25 @@
         <div class="contentClass">
             <div class="contentItem">
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>
-                <button (click)="detalheClassroom()">Detalhe Classroom</button>
+                <button mat-raised-button color="primary" (click)="detalheClassroom()">Detalhe Classroom</button>
+            </div>
+            <div class="contentItem">
+                <app-geekieone-resumo [idGeekie]="aluno.idGeekie"></app-geekieone-resumo>
+                <!--<button mat-raised-button color="primary" (click)="detalheGeekie()">Detalhe Geekie</button>-->
+            </div>
+            <div class="contentItem">
+                <app-letrus-resumo [idGoogle]="aluno.idGoogle"></app-letrus-resumo>
+                <!--<button mat-raised-button color="primary" (click)="detalheLetrus()">Detalhe Letrus</button>-->
             </div>
         </div>
-        <div *ngIf="showDetalheClassroom" class="contentItem">
+        <div *ngIf="showDetalheClassroom" class="contentDetail">
             <app-classroom-resumo [idGoogle]="aluno.idGoogle" [detalhe]="true"></app-classroom-resumo>
+        </div>
+        <div *ngIf="showDetalheGeekie" class="contentDetail">
+            <app-geekieone-resumo [idGeekie]="aluno.idGeekie" [detalhe]="true"></app-geekieone-resumo>
+        </div>
+        <div *ngIf="showDetalheLetrus" class="contentDetail">
+            <app-letrus-resumo [idGoogle]="aluno.idGoogle" [detalhe]="true"></app-letrus-resumo>
         </div>
     </ng-container>
 </div>
