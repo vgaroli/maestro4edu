@@ -8,6 +8,7 @@ export interface Escola {
   fantasia?: string
   cnpj: string
   anoLetivo: number
+  showBoletim?: boolean
 }
 
 export interface AnoLetivo{

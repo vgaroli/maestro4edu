@@ -33,6 +33,7 @@ export class PrincipalService {
   anoLetivo: number
   anosLetivos: AnoLetivo[]
   ultimoUpdateClassroom: Date
+  showBoletim: boolean = false
   salas: Sala[]
 
   @Output() okTokens = new EventEmitter<boolean>()
@@ -47,6 +48,9 @@ export class PrincipalService {
     return this.firestore.collection<AnonimoData>('uuids', ref => ref.where('uuid', "==", uuid)).valueChanges()
   }
 
+  getShowBoletimForAnonimo(escola: string): Observable<Escola>{
+    return this.firestore.collection<Escola>('escolas').doc(escola).valueChanges()
+  }
 
   updateConta(conta: Conta){
     this.firestore.collection<Conta>('contas', ref => ref.where('conta', '==', conta.conta))
@@ -91,6 +95,9 @@ export class PrincipalService {
                   this.firestore.collection<Escola>('escolas').doc(this.escola).valueChanges()
                     .subscribe(escola => {
                       this.anoLetivo = escola.anoLetivo
+                      if (escola.showBoletim){
+                        this.showBoletim = escola.showBoletim
+                      }
                       this.nomeEscola = escola.fantasia
                       this.firestore.collection<AnoLetivo>(`escolas/${this.escola}/anosLetivos`)
                         .valueChanges().subscribe(anos => {

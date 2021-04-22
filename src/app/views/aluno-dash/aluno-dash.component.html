@@ -9,7 +9,7 @@
 
     <ng-container *ngFor="let aluno of alunos">
         <div class="divCenter800" style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
-        <app-boletim [idGoogle]="aluno.idGoogle"></app-boletim>
+        <app-boletim *ngIf="showBoletim" [idGoogle]="aluno.idGoogle"></app-boletim>
         <div class="contentClass">
             <div class="contentItem">
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>

@@ -1,6 +1,8 @@
 export interface DadoBoletim {
   texto: string
   estilo: string
+  idPlanilha?: string
+  idPaginaFinal?: string
   formato?: string
 }
 

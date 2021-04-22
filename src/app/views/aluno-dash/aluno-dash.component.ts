@@ -19,6 +19,7 @@ export class AlunoDashComponent implements OnInit {
   showDetalheClassroom: boolean = false
   showDetalheGeekie: boolean = false
   showDetalheLetrus: boolean = false
+  showBoletim: boolean=false
 
   constructor(private principal: PrincipalService,
     private escolaService: EscolaService,
@@ -27,6 +28,7 @@ export class AlunoDashComponent implements OnInit {
   ngOnInit(): void {
     if (this.principal.isAnonimo) {
       this.loadAnonimoData()
+      
     } else {
       if (this.principal.tokensLoaded) {
         this.ajustes()
@@ -43,6 +45,9 @@ export class AlunoDashComponent implements OnInit {
       let uuid = params.get("uuid")
       this.principal.loadAnonimoData(uuid).pipe(take(1)).subscribe(dados => {
         if (dados) {
+          this.principal.getShowBoletimForAnonimo(dados[0].escola).subscribe(dado => {
+            this.showBoletim = dado.showBoletim
+          })
           this.principal.escola = dados[0].escola
           this.principal.anoLetivo = dados[0].anoLetivo
           this.principal.idGoogle = dados[0].idGoogle
@@ -61,6 +66,7 @@ export class AlunoDashComponent implements OnInit {
   ajustes() {
     this.isCoordenador = (this.principal.cargos.indexOf("coordenador") != -1 || this.principal.cargos.indexOf("diretor") != -1)
     this.isAluno = (this.principal.cargos.indexOf("aluno") != -1)
+    this.showBoletim = (this.showBoletim || this.isCoordenador)
   }
 
   loadSalas() {

@@ -15,8 +15,9 @@ export class BoletimComponent implements AfterViewInit  {
   cabecalho: DadoBoletim[]
   colunasGrid=0
   customStyle:string=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
+  isCoordenador: boolean
 
-  @Input() idGoogle: string = "108914885005634059304"
+  @Input() idGoogle: string = ""
   @Input() idGrade: string
   @Input() curso: string = "EF2"
 
@@ -25,7 +26,7 @@ export class BoletimComponent implements AfterViewInit  {
     private boletimService: BoletimService) { }
 
   ngAfterViewInit(){
-    if (this.principal.tokensLoaded){
+    if (this.principal.tokensLoaded || this.principal.isAnonimo){
       this.processar()
     } else {
       this.principal.okTokens.subscribe(() =>[
@@ -36,6 +37,7 @@ export class BoletimComponent implements AfterViewInit  {
 
   processar(){
     if(this.idGoogle){
+      this.isCoordenador = (this.principal.cargos.indexOf('coordenador') > -1)
       this.getBoletim(this.idGoogle)
     }
   }
@@ -51,8 +53,18 @@ export class BoletimComponent implements AfterViewInit  {
         dados.forEach(dado => {
           this.textos = this.textos.concat(dado.linhaBoletim)
         })
-        this.textos.forEach(texto => {
+        this.textos.forEach((texto,i) => {
+          if (texto.formato === "url" && this.isCoordenador){
+            let url = `https://docs.google.com/spreadsheets/d/${texto.idPlanilha}/edit#gid=${texto.idPaginaFinal}`
+            texto.texto = `<a target="_blank" href=${url}>${texto.texto}</a>`
+          }
           if(texto.formato){
+            if (texto.formato === "0.0" && texto.texto !== ""){
+              let valor: number = Number(texto.texto)
+              if (!isNaN(valor)){
+                texto.texto = valor.toLocaleString("pt-BR", {maximumFractionDigits: 1, minimumFractionDigits: 1 })
+              }
+            }
             let psP = texto.formato.indexOf('%')
             if (psP != -1){
               let ps = texto.formato.indexOf('.')
