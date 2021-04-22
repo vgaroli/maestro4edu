@@ -1,3 +1,4 @@
+import { BoletimComponent } from './../../components/boletim/boletim.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,8 +10,10 @@ import { GeekieoneResumoComponent } from '../../components/geekieone-resumo/geek
 import { LetrusResumoComponent } from '../../components/letrus-resumo/letrus-resumo.component';
 import { MatButtonModule } from '@angular/material/button';
 
+
+
 @NgModule({
-  declarations: [AlunoDashComponent, ClassroomResumoComponent, GeekieoneResumoComponent, LetrusResumoComponent],
+  declarations: [AlunoDashComponent, ClassroomResumoComponent, GeekieoneResumoComponent, LetrusResumoComponent, BoletimComponent],
   imports: [
     CommonModule,
     AlunoDashRoutingModule,

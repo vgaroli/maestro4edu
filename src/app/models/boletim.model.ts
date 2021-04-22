@@ -1,6 +1,19 @@
 export interface DadoBoletim {
   texto: string
   estilo: string
+  formato?: string
+}
+
+export interface Boletim{
+  aluno: string
+  conta: string
+  idDisciplina: string
+  idGoogle: string
+  idSala: string
+  linhaBoletim: DadoBoletim[]
+  nomeDisciplina: string
+  nomeSala: string
+  resultado: string
 }
 
 export interface Cabecalho {

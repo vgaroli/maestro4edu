@@ -35,7 +35,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 
 //Próprios
-import { BoletimComponent } from './components/boletim/boletim.component';
 import { TempoGeekieChartComponent } from './components/tempo-geekie-chart/tempo-geekie-chart.component';
 import { ClassroomListComponent } from './components/classroom-list/classroom-list.component';
 import { HomeComponent } from './views/home/home.component';
@@ -130,7 +129,6 @@ const dbConfig: DBConfig  = {
 @NgModule({
   declarations: [
     AppComponent,
-    BoletimComponent,
     TempoGeekieChartComponent,
     ClassroomListComponent,
     HomeComponent,
