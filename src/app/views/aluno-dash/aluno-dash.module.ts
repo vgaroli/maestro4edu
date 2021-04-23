@@ -9,8 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { GeekieoneResumoComponent } from '../../components/geekieone-resumo/geekieone-resumo.component';
 import { LetrusResumoComponent } from '../../components/letrus-resumo/letrus-resumo.component';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AlunoDashComponent, ClassroomResumoComponent, GeekieoneResumoComponent, LetrusResumoComponent, BoletimComponent],
@@ -18,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     AlunoDashRoutingModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ]
 })
 export class AlunoDashModule { }

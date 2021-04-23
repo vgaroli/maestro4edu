@@ -27,7 +27,7 @@ export class LetrusResumoComponent implements OnInit {
   loadResumo(){
     this.letrus.listResumoGeral(this.idGoogle).subscribe(grupo => {
       this.agrupamento = grupo
-      this.ajusteStyle
+      this.ajusteStyle()
     })
   }
 

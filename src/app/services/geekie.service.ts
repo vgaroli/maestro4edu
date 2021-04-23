@@ -20,6 +20,9 @@ export class GeekieService {
   }
 
   listResumoAluno(idGeekie: string): Observable<AgrupamentoAlunoChapterPerformance[]>{
+    if (idGeekie==="10000000069930863"){
+      console.log(idGeekie)
+    }
     let colect = `escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/engageCapituloAlunoGeralGeekie`
     return this.firestore.collection<AgrupamentoAlunoChapterPerformance>(colect, ref => ref.where('idGeekie', '==', idGeekie)).valueChanges()
   }
