@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 //echart
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -154,7 +155,7 @@ const dbConfig: DBConfig  = {
     HttpClientModule,
     MatInputModule,
     NgxPrintModule,
-    
+    MatButtonModule,
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatAutocompleteModule,

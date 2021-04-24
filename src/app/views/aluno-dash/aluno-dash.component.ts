@@ -21,6 +21,7 @@ export class AlunoDashComponent implements OnInit {
   showDetalheLetrus: boolean = false
   showBoletim: boolean=false
   showBoletimAnonimo: boolean=false
+  showNome: boolean=false
   panelOpenState = false;
 
   constructor(private principal: PrincipalService,
@@ -49,8 +50,9 @@ export class AlunoDashComponent implements OnInit {
       this.principal.loadAnonimoData(uuid).pipe(take(1)).subscribe(dados => {
         if (dados) {
           this.principal.getShowBoletimForAnonimo(dados[0].escola).subscribe(dado => {
-            this.showBoletim = dado.showBoletim
-            this.showBoletimAnonimo = true
+            this.showBoletimAnonimo = dado.showBoletim
+            this.showNome = !this.showBoletimAnonimo
+            //this.showBoletimAnonimo = true
           })
           this.principal.escola = dados[0].escola
           this.principal.anoLetivo = dados[0].anoLetivo
@@ -70,7 +72,8 @@ export class AlunoDashComponent implements OnInit {
   ajustes() {
     this.isCoordenador = (this.principal.cargos.indexOf("coordenador") != -1 || this.principal.cargos.indexOf("diretor") != -1)
     this.isAluno = (this.principal.cargos.indexOf("aluno") != -1)
-    this.showBoletimAnonimo = true // (this.showBoletim || this.isCoordenador)
+    this.showBoletimAnonimo = this.showBoletim
+    this.showNome = (!this.showBoletimAnonimo || this.isCoordenador)
   }
 
   loadSalas() {

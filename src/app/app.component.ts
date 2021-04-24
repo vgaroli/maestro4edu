@@ -19,6 +19,7 @@ export class AppComponent {
   showNavegacao:boolean= false
   showNomeAluno:boolean=false
   nomeAluno = this.principalService.nomePessoa
+  isCoordenador: boolean=false
 
   constructor(private principalService: PrincipalService) {
     let url = window.location.href
@@ -44,6 +45,7 @@ export class AppComponent {
           this.escola = this.principalService.nomeEscola
           this.anos = this.principalService.anosLetivos
           this.anoLetivo = this.principalService.anoLetivo
+          this.isCoordenador=this.principalService.cargos.indexOf["coordenador"]
         }
       }
     )

@@ -9,7 +9,7 @@
 
     <ng-container *ngFor="let aluno of alunos">
         
-        <mat-accordion *ngIf="showBoletimAnonimo" >
+        <mat-accordion *ngIf="showBoletimAnonimo">
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -36,10 +36,8 @@
 
         
         
-        <ng-container *ngIf="isCoordenador">
-        <div class="divCenter800" style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
-        <app-boletim [idGoogle]="aluno.idGoogle"></app-boletim>
-        </ng-container>
+        <div *ngIf="showNome" class="divCenter800" style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
+        <app-boletim *ngIf="isCoordenador"  [idGoogle]="aluno.idGoogle"></app-boletim>
         <div class="contentClass">
             <div class="contentItem">
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>
