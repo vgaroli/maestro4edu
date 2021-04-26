@@ -27,6 +27,7 @@ export class PrincipalService {
   autenticado: boolean = false
   photoURL: string = ""
   idUser: string = ""
+  idCurso: string = ""
   idGoogle: string = ""
   idGeekie: string=""
   conta: string = ""
@@ -70,7 +71,7 @@ export class PrincipalService {
           this.idUser = state.uid
           this.autenticado = true
           this.conta = state.email
-          //this.conta = 'regina.ratto@colegiomaterdei.net'
+//          this.conta = 'eduardo.ferrao@alunosp.colegiomaterdei.net'
           if (!this.accessToken) {
             this.login()
           } else {

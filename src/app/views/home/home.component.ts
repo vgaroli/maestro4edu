@@ -11,7 +11,11 @@ export class HomeComponent {
   showControles: boolean = false
 
   constructor(private route: Router, private principal: PrincipalService) {
-    this.showControles = this.principal.tokensLoaded
+    if(this.principal.tokensLoaded){
+      this.showControles = this.principal.tokensLoaded
+    } else {
+      this.principal.okTokens.subscribe(() => this.showControles=this.principal.tokensLoaded)
+    }
   }
 
   goMapa() {

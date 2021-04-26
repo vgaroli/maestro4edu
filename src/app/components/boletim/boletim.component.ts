@@ -16,10 +16,11 @@ export class BoletimComponent implements AfterViewInit  {
   colunasGrid=0
   customStyle:string=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
   isCoordenador: boolean
+  isAluno:boolean
 
   @Input() idGoogle: string = ""
   @Input() idGrade: string
-  @Input() curso: string = "EF2"
+  @Input() idCurso: string = "EF2"
 
   constructor(private firestore: AngularFirestore, 
     private principal: PrincipalService,
@@ -38,12 +39,13 @@ export class BoletimComponent implements AfterViewInit  {
   processar(){
     if(this.idGoogle){
       this.isCoordenador = (this.principal.cargos.indexOf('coordenador') > -1)
+      this.isAluno = (this.principal.cargos.indexOf('aluno') > -1)
       this.getBoletim(this.idGoogle)
     }
   }
 
   getBoletim(idGoogle: string){
-    this.firestore.doc<Cabecalho>(`escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/cabecalhosBoletins/${this.curso}`)
+    this.firestore.doc<Cabecalho>(`escolas/${this.principal.escola}/anosLetivos/${this.principal.anoLetivo}/cabecalhosBoletins/${this.idCurso}`)
     .get().subscribe(cabecalho => {
       this.colunasGrid=cabecalho.data().colunas
       this.customStyle=`grid-template-columns: repeat(${this.colunasGrid}, auto)`
@@ -54,7 +56,7 @@ export class BoletimComponent implements AfterViewInit  {
           this.textos = this.textos.concat(dado.linhaBoletim)
         })
         this.textos.forEach((texto,i) => {
-          if (texto.formato === "url" && this.isCoordenador){
+          if (texto.formato === "url" && (this.isCoordenador || (this.isAluno && this.principal.tokensLoaded))){
             let url = `https://docs.google.com/spreadsheets/d/${texto.idPlanilha}/edit#gid=${texto.idPaginaFinal}`
             texto.texto = `<a target="_blank" href=${url}>${texto.texto}</a>`
           }

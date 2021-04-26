@@ -19,20 +19,20 @@ export class AlunoDashComponent implements OnInit {
   showDetalheClassroom: boolean = false
   showDetalheGeekie: boolean = false
   showDetalheLetrus: boolean = false
-  showBoletim: boolean=false
-  showBoletimAnonimo: boolean=false
-  showNome: boolean=false
+  showBoletim: boolean = false
+  showBoletimAnonimo: boolean = false
+  showNome: boolean = false
   panelOpenState = false;
 
   constructor(private principal: PrincipalService,
     private escolaService: EscolaService,
     private route: ActivatedRoute) { }
-    
+
 
   ngOnInit(): void {
     if (this.principal.isAnonimo) {
       this.loadAnonimoData()
-      
+
     } else {
       if (this.principal.tokensLoaded) {
         this.ajustes()
@@ -58,6 +58,9 @@ export class AlunoDashComponent implements OnInit {
           this.principal.anoLetivo = dados[0].anoLetivo
           this.principal.idGoogle = dados[0].idGoogle
           this.principal.nomePessoa = dados[0].nomeAluno
+          if (dados[0].idCurso){
+            this.principal.idCurso = dados[0].idCurso
+          }
           if (dados[0].idGeekie) {
             this.principal.idGeekie = dados[0].idGeekie
           }
@@ -90,6 +93,7 @@ export class AlunoDashComponent implements OnInit {
         nomeAluno: this.principal.nomePessoa,
         nomeSala: ""
       }
+      this.showBoletimAnonimo = true
       this.alunos.push(alunoSala)
     }
   }
@@ -103,25 +107,25 @@ export class AlunoDashComponent implements OnInit {
 
   detalheClassroom() {
     this.showDetalheClassroom = (!this.showDetalheClassroom)
-    if(this.showDetalheClassroom){
-      this.showDetalheGeekie=false
-      this.showDetalheLetrus=false
+    if (this.showDetalheClassroom) {
+      this.showDetalheGeekie = false
+      this.showDetalheLetrus = false
     }
   }
 
   detalheGeekie() {
     this.showDetalheGeekie = (!this.showDetalheGeekie)
-    if(this.showDetalheGeekie){
-      this.showDetalheClassroom=false
-      this.showDetalheLetrus=false
+    if (this.showDetalheGeekie) {
+      this.showDetalheClassroom = false
+      this.showDetalheLetrus = false
     }
   }
 
   detalheLetrus() {
     this.showDetalheLetrus = (!this.showDetalheLetrus)
-    if(this.showDetalheLetrus){
-      this.showDetalheClassroom=false
-      this.showDetalheGeekie=false
+    if (this.showDetalheLetrus) {
+      this.showDetalheClassroom = false
+      this.showDetalheGeekie = false
     }
   }
 }

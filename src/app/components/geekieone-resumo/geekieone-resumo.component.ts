@@ -2,7 +2,6 @@ import { AgrupamentoAlunoChapterPerformance } from './../../models/geekie.model'
 import { GeekieService } from './../../services/geekie.service';
 import { PrincipalService } from './../../services/principal.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { G } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-geekieone-resumo',
