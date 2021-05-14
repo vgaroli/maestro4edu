@@ -53,10 +53,22 @@ export interface Pai{
   nome: string
 }
 
+export interface Menu{
+  routerLink: string
+  icone: string
+  texto: string
+}
+
+export interface MenuCargo{
+  cargo: string
+  menus: string[]
+}
+
 export interface Conta{
   id?: string
   idGoogle: string
   idGeekie?: string
+  idCurso?: string
   conta: string
   escola: string
   pessoa: string

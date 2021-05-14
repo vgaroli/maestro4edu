@@ -1,6 +1,6 @@
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Escola, AnoLetivo, Docente, Sala } from './../models/escola.model';
-import { AnonimoData, Conta } from './../models/basic.model';
+import { AnonimoData, Conta, Menu, MenuCargo } from './../models/basic.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { EventEmitter, Injectable, Output } from '@angular/core';
@@ -36,6 +36,7 @@ export class PrincipalService {
   ultimoUpdateClassroom: Date
   showBoletim: boolean = false
   salas: Sala[]
+  menus:Menu[]
 
   @Output() okTokens = new EventEmitter<boolean>()
 
@@ -61,6 +62,15 @@ export class PrincipalService {
   )
 }
 
+loadMenu():Observable<Menu[]>{
+  let menus: Observable<Menu[]>
+  this.cargos.forEach(cargo => {
+    this.firestore.collection<MenuCargo>('menuCargo').doc(cargo).valueChanges().pipe(take(1)).subscribe(menu => {
+    })
+  })
+  return menus
+}
+
   checkToken() {
     this.auth.authState.subscribe(
       state => {
@@ -71,7 +81,7 @@ export class PrincipalService {
           this.idUser = state.uid
           this.autenticado = true
           this.conta = state.email
-//          this.conta = 'eduardo.ferrao@alunosp.colegiomaterdei.net'
+         // this.conta = 'henrique.nichi@alunosp.colegiomaterdei.net'
           if (!this.accessToken) {
             this.login()
           } else {
@@ -83,6 +93,9 @@ export class PrincipalService {
                   this.idGoogle = conta.idGoogle
                   if (conta.idGeekie){
                     this.idGeekie = conta.idGeekie
+                  }
+                  if (conta.idCurso){
+                    this.idCurso = conta.idCurso
                   }
                   this.escola = conta.escola
                   this.cargos = conta.cargos

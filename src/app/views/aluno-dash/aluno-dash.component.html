@@ -37,7 +37,7 @@
         
         
         <div *ngIf="showNome" class="divCenter800" style="font-size: large; font-weight: bold;"> {{ aluno.nomeAluno }}</div>
-        <app-boletim *ngIf="isCoordenador"  [idGoogle]="aluno.idGoogle"></app-boletim>
+        <app-boletim *ngIf="isCoordenador"  [idGoogle]="aluno.idGoogle" [idCurso]="aluno.idCurso"></app-boletim>
         <div class="contentClass">
             <div class="contentItem">
                 <app-classroom-resumo [idGoogle]="aluno.idGoogle"></app-classroom-resumo>

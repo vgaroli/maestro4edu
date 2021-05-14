@@ -1,6 +1,7 @@
 import { AnoLetivo } from './models/escola.model';
 import { PrincipalService } from './services/principal.service';
 import { Component } from '@angular/core';
+import { Menu } from './models/basic.model';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  menus = []
+  menus: Menu[] = []
   title = 'maestro4edu';
   photoURL: string = null
   autenticado: boolean = false
@@ -46,9 +47,14 @@ export class AppComponent {
           this.anos = this.principalService.anosLetivos
           this.anoLetivo = this.principalService.anoLetivo
           this.isCoordenador=this.principalService.cargos.indexOf["coordenador"]
+          this.loadMenu()
         }
       }
     )
+  }
+
+  loadMenu(){
+    
   }
 
   logout() {

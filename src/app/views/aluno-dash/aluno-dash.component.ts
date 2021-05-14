@@ -91,7 +91,8 @@ export class AlunoDashComponent implements OnInit {
         idGeekie: this.principal.idGeekie,
         idSala: "",
         nomeAluno: this.principal.nomePessoa,
-        nomeSala: ""
+        nomeSala: "",
+        idCurso: this.principal.idCurso
       }
       this.showBoletimAnonimo = true
       this.alunos.push(alunoSala)
