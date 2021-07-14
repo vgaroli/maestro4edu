@@ -53,3 +53,38 @@ export interface DadosDisciplinaBoletim {
   resultado: string
 }
 
+
+//Legado 2020
+export interface BoletimAluno {
+  aluno: string,
+  grade: string,
+  idGoogle?: string,
+  notas: DadosDisciplinaBoletim[]
+}
+
+export interface Boletim2020 {
+  id?: string,
+  aluno: string,
+  grade: string,
+  idGoogle: string,
+  idDiario?: string,
+  idPaginaFinal?: string,
+  professores: string[],
+  nome: string,
+  sigla: string,
+  notas: [
+    { etapa: string, nota: number, media: number, faltas: number },
+    { etapa: string, nota: number, media: number, faltas: number },
+    { etapa: string, nota: number, media: number, faltas: number }
+  ],
+  totalFaltas: number,
+  totalPontos: number,
+  percentualFaltas: number,
+  percentualFrequencia: number,
+  mediaAnual: number,
+  recuperacao: number,
+  mediaFinal1: number,
+  segundaProva: number,
+  mediaFinal2: number,
+  resultado: string,
+}

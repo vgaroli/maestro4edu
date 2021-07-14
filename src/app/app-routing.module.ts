@@ -1,3 +1,4 @@
+import { Boletim2020Component } from './components/boletim2020/boletim2020.component';
 import { DashTarefasComponent } from './views/dash-tarefas/dash-tarefas.component';
 import { HomeComponent } from './views/home/home.component';
 import { BoletimComponent } from './components/boletim/boletim.component';
@@ -8,6 +9,10 @@ const routes: Routes = [
   {
     path: 'boletim',
     component: BoletimComponent
+  },
+  {
+    path: 'boletim2020',
+    component: Boletim2020Component
   },
   {
     path: '',

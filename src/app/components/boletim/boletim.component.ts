@@ -1,6 +1,5 @@
 import { BoletimService } from './../../services/boletim.service';
 import { PrincipalService } from './../../services/principal.service';
-import { DadosDisciplinaBoletim } from './../../models/boletim.model';
 import { Component, AfterViewInit, Input  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Cabecalho, DadoBoletim } from 'src/app/models/boletim.model';

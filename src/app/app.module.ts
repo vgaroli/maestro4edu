@@ -47,6 +47,7 @@ import { LetrusDataComponent } from './components/letrus-data/letrus-data.compon
 
 //print
 import {NgxPrintModule} from 'ngx-print';
+import { Boletim2020Component } from './components/boletim2020/boletim2020.component';
 
 const dbConfig: DBConfig  = {
   name: 'maestro4edu',
@@ -136,6 +137,7 @@ const dbConfig: DBConfig  = {
     DashTarefasComponent,
     GeekieClassPerfComponent,
     LetrusDataComponent,
+    Boletim2020Component,
   ],
   imports: [
     BrowserModule,

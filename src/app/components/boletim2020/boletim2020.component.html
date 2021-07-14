@@ -1,0 +1,128 @@
+<ng-container *ngIf="coordenacao">
+    <div class="tool">
+        <mat-button-toggle-group (change)="changeGrade($event)" #group="matButtonToggleGroup">
+            <mat-button-toggle value="EF06" aria-label="Text align left">
+                EF06
+            </mat-button-toggle>
+            <mat-button-toggle value="EF07" aria-label="Text align left">
+                EF07
+            </mat-button-toggle>
+            <mat-button-toggle value="EF08" aria-label="Text align left">
+                EF08
+            </mat-button-toggle>
+            <mat-button-toggle value="EF09" aria-label="Text align left">
+                EF09
+            </mat-button-toggle>
+            <mat-button-toggle value="EM01" aria-label="Text align left">
+                EM01
+            </mat-button-toggle>
+            <mat-button-toggle value="EM02" aria-label="Text align left">
+                EM02
+            </mat-button-toggle>
+            <mat-button-toggle value="EM03" aria-label="Text align left">
+                EM03
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+        <!--
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="todos" checked="true">Todos</mat-radio-button>
+        <mat-radio-button value="Recuperação">Recuperação</mat-radio-button>
+      </mat-radio-group>
+      -->
+    </div>
+    <div class="distancia"></div>
+</ng-container>
+<div class="topContainer">
+    <ng-container *ngFor="let boletim of listaBoletinsAlunos">
+        <div>
+            <div class="header">
+                <div>Grade: {{ boletim.grade }} - {{ boletim.idGoogle }}</div>
+                <div>Nome: <a (click)="abrirFichaAluno(boletim.idGoogle)">{{ boletim.aluno }}</a></div>
+            </div>
+            <div class="grid-container">
+                <div class="item1">Componente<br /> Curricular</div>
+                <div class="item2">
+                    1º Trimestre
+                    <div class="grid-notas">
+                        <div>Nota</div>
+                        <div>Média</div>
+                        <div>Faltas</div>
+                    </div>
+                </div>
+                <div class="item3">
+                    2º Trimestre
+                    <div class="grid-notas">
+                        <div>Nota</div>
+                        <div>Média</div>
+                        <div>Faltas</div>
+                    </div>
+                </div>
+                <div class="item4">
+                    3º Trimestre
+                    <div class="grid-notas">
+                        <div>Nota</div>
+                        <div>Média</div>
+                        <div>Faltas</div>
+                    </div>
+                </div>
+                <div class="item5">Total Faltas</div>
+                <div class="item6">% Freq</div>
+                <div class="item7">Total Pontos</div>
+                <div class="item8">Média Anual</div>
+                <div class="item9">Rec.</div>
+                <div class="item10">Média Final</div>
+                <div class="item11">2ª Prova</div>
+                <div class="item12">Média Final</div>
+                <div class="item13">Resultado</div>
+                <!--<div></div>-->
+                <div class="grid-container-notas">
+                    <ng-container *ngFor="let disciplina of boletim.notas">
+                        <div class="texto" *ngIf="coordenacao; else alunoDiario">
+                            <a target="_blank"
+                                href="https://docs.google.com/spreadsheets/d/{{ disciplina.idDiario }}/edit#gid={{ disciplina.idPaginaFinal }}">{{disciplina.disciplina}}</a>
+                        </div>
+                        <ng-template #alunoDiario>{{disciplina.disciplina}}</ng-template>
+                        <div
+                            [ngClass]="{'red': disciplina.nota1 < 6 && disciplina.nota1, 'orange': disciplina.nota1 < 7 && disciplina.nota1 >= 6 && disciplina.nota1 }">
+                            {{disciplina.nota1 | number:'1.1-1'}}</div>
+                        <div
+                            [ngClass]="{'red': disciplina.media1 < 6 && disciplina.media1, 'orange': disciplina.media1 < 7 && disciplina.media1 >= 6 && disciplina.media1 }">
+                            {{disciplina.media1 | number:'1.1-1'}}</div>
+                        <div>
+                            {{disciplina.faltas1}}</div>
+                        <div
+                            [ngClass]="{'red': disciplina.nota2 < 6 && disciplina.nota2, 'orange': disciplina.nota2 < 7 && disciplina.nota2 >= 6 && disciplina.nota2 }">
+                            {{disciplina.nota2 | number:'1.1-1'}}</div>
+                        <div
+                            [ngClass]="{'red': disciplina.media2 < 6 && disciplina.media2, 'orange': disciplina.media2 < 7 && disciplina.media2 >= 6 && disciplina.media2 }">
+                            {{disciplina.media2 | number:'1.1-1'}}</div>
+                        <div>
+                            {{disciplina.faltas2}}</div>
+
+                        <div
+                            [ngClass]="{'red': disciplina.nota3 < 6 && disciplina.nota3, 'orange': disciplina.nota3 < 7 && disciplina.nota3 >= 6 && disciplina.nota3 }">
+                            {{disciplina.nota3 | number:'1.1-1'}}</div>
+                        <div
+                            [ngClass]="{'red': disciplina.media3 < 6 && disciplina.media3, 'orange': disciplina.media3 < 7 && disciplina.media3 >= 6 && disciplina.media3 }">
+                            {{disciplina.media3 | number:'1.1-1'}}</div>
+                        <div>{{disciplina.faltas3}}</div>
+                        <div>{{disciplina.totalFaltas}}</div>
+                        <div>{{disciplina.percFreq | percent:'1.1-1'}}</div>
+                        <div>{{disciplina.pontos | number:'1.1-1'}}</div>
+                        <div>{{disciplina.mediaAnual | number:'1.1-1'}}</div>
+                        <div>{{disciplina.recuperacao | number:'1.1-1'}}</div>
+                        <div>{{disciplina.mediaFinal1 | number:'1.1-1'}}</div>
+                        <div>{{disciplina.segundaProva | number:'1.1-1'}}</div>
+                        <div>{{disciplina.mediaFinal2 | number:'1.1-1'}}</div>
+                        <div class="texto">{{disciplina.resultado}}</div>
+                        <!--<div>
+                <ng-container *ngIf="disciplina.resultado != 'Aprovado' && disciplina.resultado != '' && coordenacao">
+                  <input type="checkbox" (click)="conselho(disciplina.idDiario, $event)" name="" id="" >Apr. por cons. de classe
+                </ng-container>
+              </div>-->
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
