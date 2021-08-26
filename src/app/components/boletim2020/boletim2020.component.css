@@ -1,0 +1,88 @@
+.tool {
+    position: fixed;
+    top: 60px;
+}
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+
+.distancia{
+    margin-bottom: 80px;
+}
+
+.topContainer{
+    margin-left: 10px;
+}
+.header{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px repeat(17, 45px) 120px;
+    text-align: center;
+}
+
+.grid-container > div{
+    border: 1px solid;
+}
+
+.item2linhas  {
+    grid-row: 1 / span 2;
+}
+
+.item2 {
+    grid-column: 2 / span 3;
+}
+
+.item3 {
+    grid-column: 5 / span 3;
+}
+
+.item4 {
+    grid-column: 8 / span 3;
+}
+
+.grid-notas {
+    display: grid;
+    grid-template-columns: repeat(3, 45px);
+}
+
+.grid-notas > div{
+    border-right: 1px solid;
+    border-top: 1px solid;
+}
+
+.grid-container-notas {
+    display: grid;
+    grid-template-columns: 200px repeat(17, 45px) 120px;
+    text-align: right;
+}
+
+.grid-container-notas > div{
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.texto{
+    text-align: left;
+}
+
+
+.red {
+    background-color: indianred;
+}
+
+.orange{
+    background-color: orange;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+mat-radio-button{
+    margin-left: 10px;
+}

@@ -1,7 +1,9 @@
+import { PrincipalService } from './../../services/principal.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { Boletim2020, BoletimAluno, DadosDisciplinaBoletim } from './../../models/boletim.model';
 import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,20 +11,41 @@ import { Observable } from 'rxjs';
   templateUrl: './boletim2020.component.html',
   styleUrls: ['./boletim2020.component.css']
 })
-export class Boletim2020Component implements OnInit {
+export class Boletim2020Component implements AfterViewInit {
   @Input() idgoogle: string = null
   coordenacao: boolean = false
   lastGrade: string = ""
 
+
+  toppings = new FormControl();
+
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   listaBoletinsAlunos: BoletimAluno[]
 
   listaBoletim$: Observable<Boletim2020[]>
 
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private principal: PrincipalService, private firestore: AngularFirestore) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(){
+    if (this.principal.tokensLoaded || this.principal.isAnonimo){
+      this.coordenacao = (this.principal.cargos.indexOf('coordenador') > -1)
+      console.log("1")
+    } else {
+      this.principal.okTokens.subscribe(() =>[
+        this.coordenacao = (this.principal.cargos.indexOf('coordenador') > -1)
+      ])
+      console.log("2")
+    }   
+  }
+
+
+  changeGrade(event) {
+    console.log("3")
+    console.log(event.value)
+    this.lastGrade = event.value
+    this.reloadBoletins(null, event.value)
   }
 
   getAluno(): void {
@@ -39,14 +62,18 @@ export class Boletim2020Component implements OnInit {
     this.listaBoletinsAlunos = []
     if (this.coordenacao) {
       if (idGoogle) {
-        this.listaBoletim$ = this.firestore.collection<Boletim2020>('escola/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/boletins',
+        this.listaBoletim$ = this.firestore.collection<Boletim2020>('escolas/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/boletins',
         ref => ref.orderBy("grade").orderBy("aluno").where("idGoogle","==",idGoogle)).valueChanges()
       } else {
-        this.listaBoletim$ =this.firestore.collection<Boletim2020>('escola/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/boletins',
+        console.log("completo")
+        console.log(grade)
+        this.listaBoletim$ =this.firestore.collection<Boletim2020>('escolas/YPyLAYTFN6rkQa0Iyguj/anosLetivos/2020/boletins',
         ref => ref.orderBy("aluno").where("grade","==",grade)).valueChanges()
       }
     } 
     this.listaBoletim$.subscribe(boletim => {
+      console.log("assinatura")
+      console.log(boletim)
       let idGoogle = ""
       let n = 0
       let alunoAtual = ""

@@ -26,7 +26,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //echart
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -159,6 +159,7 @@ const dbConfig: DBConfig  = {
     NgxPrintModule,
     MatButtonModule,
     CKEditorModule,
+    MatButtonToggleModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatAutocompleteModule,
     NgxIndexedDBModule.forRoot(dbConfig),
